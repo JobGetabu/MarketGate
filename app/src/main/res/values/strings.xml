@@ -1,3 +1,47 @@
 <resources>
     <string name="app_name">MarketGate</string>
+
+    <!-- Date Util -->
+    <string name="date_util_term_less">less than</string>
+    <string name="date_util_term_a">a</string>
+    <string name="date_util_term_an">an</string>
+
+    <string name="date_util_unit_second">second</string>
+    <string name="date_util_unit_seconds">seconds</string>
+    <string name="date_util_unit_minute">minute</string>
+    <string name="date_util_unit_minutes">minutes</string>
+    <string name="date_util_unit_hour">hour</string>
+    <string name="date_util_unit_hours">hours</string>
+    <string name="date_util_unit_day">day</string>
+    <string name="date_util_unit_days">days</string>
+    <string name="date_util_unit_month">month</string>
+    <string name="date_util_unit_months">months</string>
+    <string name="date_util_unit_year">year</string>
+    <string name="date_util_unit_years">years</string>
+
+    <string name="date_util_prefix_lt">less than a</string>
+    <string name="date_util_prefix_about">about</string>
+    <string name="date_util_prefix_over">over</string>
+    <string name="date_util_prefix_almost">almost</string>
+
+    <string name="date_util_suffix">ago</string>
+    <string name="login">Login</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="code">Code</string>
+    <string name="social_login">Social Login</string>
+    <string name="resend_code">Resend Code</string>
+
+    <string name="facebook_app_id">403019067173396</string>
+    <string name="fb_login_protocol_scheme">fb403019067173396</string>
+
+    <string name="sign_in_cancelled">Sign in Cancelled</string>
+    <string name="no_internet_connection">No internet Connection</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="error_occured">Error Occurred</string>
+
+    <string name="your_offline">You\'re offline</string>
+    <string name="retry">Retry</string>
+    <string name="chooseEmailClient">Choose your email app</string>
+    <string name="you_all_set">You\'re all Set</string>
+
 </resources>
