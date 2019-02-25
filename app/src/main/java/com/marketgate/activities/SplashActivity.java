@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
 
         }
 
-        Intent i = new Intent(SplashActivity.this, MainActivity.class);//introActivity
+        Intent i = new Intent(SplashActivity.this, FarmerActivity.class);//introActivity
         startActivity(i);
         finish();
     }

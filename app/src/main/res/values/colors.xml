@@ -3,4 +3,17 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="milkWhite">#F9F9F9</color>
+    <color name="contentDividerLine">#e0e0e0</color>
+    <color name="card_bck">#F1F0F5</color>
+    <color name="grey_light">#8D8C91</color>
+    <color name="error_light">#E53568</color>
+
+    <color name="semitransparent">#64696969</color>
+    <color name="semitransparent_darker">#a0696969</color>
+    <color name="bg_trans">#c8000000</color>
+    <color name="bg_trans2">#96000000</color>
+    <color name="blue">#3F51B5</color>
+
 </resources>

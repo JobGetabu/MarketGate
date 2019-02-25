@@ -44,4 +44,7 @@
     <string name="chooseEmailClient">Choose your email app</string>
     <string name="you_all_set">You\'re all Set</string>
 
+    <string name="dismiss">Dismiss</string>
+    <string name="content_description">Content Description</string>
+
 </resources>
