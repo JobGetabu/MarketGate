@@ -1,7 +1,8 @@
-package com.marketgate
+package com.marketgate.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.marketgate.R
 
 class MainActivity : AppCompatActivity() {
 
