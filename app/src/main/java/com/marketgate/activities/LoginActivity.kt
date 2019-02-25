@@ -20,7 +20,8 @@ class LoginActivity : AppCompatActivity() {
         loader = LoaderDialogue()
 
         loginFarmer.setOnClickListener {
-            showProgress("Login in...","Accessing farmers account")
+            //showProgress("Login in...","Accessing farmers account")
+            launchActivity(FarmerActivity::class.java)
         }
     }
 
