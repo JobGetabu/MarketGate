@@ -35,6 +35,30 @@
         <meta-data
                 android:name="preloaded_fonts"
                 android:resource="@array/preloaded_fonts"/>
+
+        <!-- uCrop cropping activity -->
+        <activity
+                android:name="com.yalantis.ucrop.UCropActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".utils.ImagePickerActivity" />
+
+        <!-- cache directory file provider paths -->
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationId}.provider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_provider" />
+        </provider>
+
+        <provider
+                android:authorities="${applicationId}.provider"
+                android:name=".utils.LocalStorageProvider"
+                android:exported="false"/>
+
     </application>
 
 </manifest>
