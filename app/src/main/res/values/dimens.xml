@@ -27,6 +27,7 @@
     <dimen name="spacing_xxlarge">50dp</dimen>
     <dimen name="spacing_xxxlarge">55dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
 
     <integer name="anim_duration_very_long">1500</integer>
     <integer name="anim_duration_long">500</integer>

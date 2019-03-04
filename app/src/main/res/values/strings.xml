@@ -61,5 +61,8 @@
     <string name="lbl_choose_from_gallery">Choose from gallery</string>
     <string name="toast_image_intent_null">Image null</string>
     <string name="internal_storage">Internal Storage</string>
+    <string name="fullname">Full Name</string>
+    <string name="phone">Phone</string>
+    <string name="location">Location</string>
 
 </resources>
