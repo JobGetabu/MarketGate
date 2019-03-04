@@ -8,14 +8,17 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -41,6 +44,7 @@ public class DialogFullscreenFragment extends DialogFragment {
     private View root_view;
 
     private ImageView productPic;
+    private EditText pName, pDescription, pUnits, pPrice, pType;
 
 
     @Override
@@ -50,6 +54,11 @@ public class DialogFullscreenFragment extends DialogFragment {
 
 
         productPic = root_view.findViewById(R.id.d_product_pic);
+        pName = root_view.findViewById(R.id.d_prname);
+        pDescription = root_view.findViewById(R.id.d_pr_unitdes);
+        pPrice = root_view.findViewById(R.id.d_pr_unitprice);
+        pUnits = root_view.findViewById(R.id.d_pr_units);
+        pType = root_view.findViewById(R.id.d_pr_type);
 
         root_view.findViewById(R.id.three_passport2).setOnClickListener(v -> onProfileImageClick());
         root_view.findViewById(R.id.bt_close).setOnClickListener(v -> dismiss());
@@ -63,9 +72,23 @@ public class DialogFullscreenFragment extends DialogFragment {
     }
 
     private void sendDataResult() {
-        UserFarmerProduct userFarmerProduct = new UserFarmerProduct();
+        String name = pName.getText().toString();
+        String picurl = "";
+        String descripction = pDescription.getText().toString();
+        String type = pType.getText().toString();
+        double price = 0;
+        double units;
+        if (!TextUtils.isEmpty(pPrice.getText().toString())) {
 
+             price = Double.valueOf(pPrice.getText().toString());
+        }
+        if (!TextUtils.isEmpty(pUnits.getText().toString())) ;
+        {
+             units = Double.valueOf(pUnits.getText().toString());
+        }
+        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        UserFarmerProduct userFarmerProduct = new UserFarmerProduct(name, type, "", null, units, price, descripction, userid);
 
         if (callbackResult != null) {
             callbackResult.sendResult(request_code, userFarmerProduct);

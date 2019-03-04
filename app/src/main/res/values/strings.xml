@@ -55,5 +55,11 @@
     <string name="farm_title_1">Product</string>
     <string name="farm_title_2">Agency</string>
     <string name="farm_title_3">Profile</string>
+    <string name="SAVE">Save</string>
+    <string name="lbl_set_product_photo">Select product photo</string>
+    <string name="lbl_take_camera_picture">Take camera picture</string>
+    <string name="lbl_choose_from_gallery">Choose from gallery</string>
+    <string name="toast_image_intent_null">Image null</string>
+    <string name="internal_storage">Internal Storage</string>
 
 </resources>

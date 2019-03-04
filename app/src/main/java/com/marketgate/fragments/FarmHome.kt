@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-
+import androidx.fragment.app.FragmentTransaction
 import com.marketgate.R
+import com.marketgate.utils.DialogFullscreenFragment
+import kotlinx.android.synthetic.main.fragment_farm_home.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val DIALOG_QUEST_CODE = 100
 
 /**
  * A simple [Fragment] subclass.
@@ -28,5 +27,24 @@ class FarmHome : Fragment() {
         return inflater.inflate(R.layout.fragment_farm_home, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        farmhome_add.setOnClickListener { showDialogFullscreen() }
+    }
+
+    private fun showDialogFullscreen() {
+        val fragmentManager = fragmentManager
+        val newFragment = DialogFullscreenFragment()
+        newFragment.setRequestCode(DIALOG_QUEST_CODE)
+        val transaction = fragmentManager!!.beginTransaction()
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit()
+        newFragment.setOnCallbackResult(DialogFullscreenFragment.CallbackResult { requestCode, obj ->
+            if (requestCode == DIALOG_QUEST_CODE){
+                //do some shit
+            }
+        })
+    }
 
 }

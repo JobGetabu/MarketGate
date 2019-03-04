@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification
@@ -21,19 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 
-class FarmerActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
-    override fun onPageScrollStateChanged(state: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onPageSelected(position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+class FarmerActivity : AppCompatActivity(){
     companion object {
         private const val HOME = "Farmer"
         private const val PRODUCT = "Product"
@@ -90,7 +77,7 @@ class FarmerActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
         noSwipePager.adapter = adapter
         noSwipePager.setPagingEnabled(false)
-        noSwipePager.offscreenPageLimit = 3
+        noSwipePager.offscreenPageLimit = 2
 
         noSwipePager.currentItem = 0
         bottomNav.currentItem = 0
@@ -115,7 +102,6 @@ class FarmerActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
         )
 
         bottomNav.addItem(item1)
-        bottomNav.addItem(item2)
         bottomNav.addItem(item3)
         bottomNav.addItem(item4)
 
@@ -133,6 +119,7 @@ class FarmerActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
             fetchColor(R.color.bottomtab_item_resting,this))
 
         bottomNav.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
+
         //translucent bottom navigation
         bottomNav.isTranslucentNavigationEnabled = true
 
