@@ -1,4 +1,4 @@
-package com.marketgate.activities
+package com.marketgate.agent
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

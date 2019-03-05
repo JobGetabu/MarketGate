@@ -1,13 +1,13 @@
-package com.marketgate.activities
+package com.marketgate.admin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.marketgate.R
 
-class AgrovetActivity : AppCompatActivity() {
+class AdminActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_agrovet)
+        setContentView(R.layout.activity_admin)
     }
 }

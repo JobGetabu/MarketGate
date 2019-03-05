@@ -1,4 +1,4 @@
-package com.marketgate.activities
+package com.marketgate.farmer
 
 import android.content.Context
 import android.content.Intent
@@ -12,11 +12,8 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification
 import com.google.firebase.auth.FirebaseAuth
 import com.marketgate.R
+import com.marketgate.core.LoginActivity
 import com.marketgate.adapters.BottomBarAdapter
-import com.marketgate.fragments.FarmAgency
-import com.marketgate.fragments.FarmHome
-import com.marketgate.fragments.FarmNews
-import com.marketgate.fragments.FarmProfile
 import com.marketgate.utils.fetchColor
 import com.marketgate.utils.fetchDrawable
 import com.marketgate.utils.fetchString

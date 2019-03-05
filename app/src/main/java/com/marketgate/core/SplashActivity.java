@@ -1,4 +1,4 @@
-package com.marketgate.activities;
+package com.marketgate.core;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.marketgate.fragments
+package com.marketgate.farmer
 
 
 import android.os.Bundle

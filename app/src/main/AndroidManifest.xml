@@ -14,21 +14,21 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".activities.AgrovetActivity">
+        <activity android:name=".agrovet.AgrovetActivity">
         </activity>
-        <activity android:name=".activities.AgentActivity">
+        <activity android:name=".agent.AgentActivity">
         </activity>
-        <activity android:name=".activities.AdminActivity">
+        <activity android:name=".admin.AdminActivity">
         </activity>
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name=".core.LoginActivity">
         </activity>
-        <activity android:name=".activities.FarmerActivity">
+        <activity android:name=".farmer.FarmerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
         <activity
-                android:name=".activities.SplashActivity"
+                android:name=".core.SplashActivity"
                 android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

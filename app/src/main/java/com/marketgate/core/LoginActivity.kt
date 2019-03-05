@@ -1,4 +1,4 @@
-package com.marketgate.activities
+package com.marketgate.core
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,14 +13,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.marketgate.R
+import com.marketgate.farmer.FarmerActivity
 import com.marketgate.utils.GoogleLoginCallback
 import com.marketgate.utils.LoaderDialogue
 import com.marketgate.utils.LoaderDialogue.DIA_TITLE
 import com.marketgate.utils.LoaderDialogue.DIA_TXT
 import com.marketgate.utils.PreferenceHelper.PREF_USER_TYPE
-import com.marketgate.utils.RC_SIGN_IN
 import com.marketgate.utils.PreferenceHelper.customPrefs
-import com.marketgate.utils.PreferenceHelper.get
 import com.marketgate.utils.PreferenceHelper.set
 import kotlinx.android.synthetic.main.login_prompt.*
 
