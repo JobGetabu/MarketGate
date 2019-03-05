@@ -13,6 +13,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.marketgate.R
+import com.marketgate.admin.AdminActivity
+import com.marketgate.agent.AgentActivity
+import com.marketgate.agrovet.AgrovetActivity
 import com.marketgate.farmer.FarmerActivity
 import com.marketgate.utils.GoogleLoginCallback
 import com.marketgate.utils.LoaderDialogue
@@ -29,6 +32,7 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
     private lateinit var loader: LoaderDialogue
     private  var TAG: String = "login"
     private lateinit var auth: FirebaseAuth
+    private lateinit var usertype: String
 
     override val googleApiClient: GoogleSignInOptions by lazy {
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -51,8 +55,28 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
 
         loginFarmer.setOnClickListener {
             showProgress("Login in...","Accessing farmers account")
+            usertype = "Farmer"
             logInWithGoogle(this)
         }
+
+        loginAgent.setOnClickListener {
+            showProgress("Login in...","Accessing agent account")
+            usertype = "Agent"
+            logInWithGoogle(this)
+        }
+
+        loginAgrovet.setOnClickListener {
+            showProgress("Login in...","Accessing agrovet account")
+            usertype = "Agrovet"
+            logInWithGoogle(this)
+        }
+
+        loginAdmin.setOnClickListener {
+            showProgress("Login in...","Accessing admin account")
+            usertype = "Admin"
+            logInWithGoogle(this)
+        }
+
     }
 
     private fun launchActivity(intentClass: Class<*>) {
@@ -93,7 +117,7 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
 
                     //TODO: save to DB
 
-                    goToHome()
+                    goToHome(usertype)
                 } else {
                     // If sign in fails, display a message to the user.
                     dismissProgressDialog()
@@ -111,14 +135,42 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
     }
 
 
-    private fun goToHome() {
-        val prefs = customPrefs(this)
-        prefs[PREF_USER_TYPE] = "Farmer"
+    private fun goToHome(usertype: String) {
 
         dismissProgressDialog()
-        val intent = FarmerActivity.newIntent(this).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        var intent : Intent? = null
+
+        when(usertype){
+            "Farmer" -> {
+                val prefs = customPrefs(this)
+                prefs[PREF_USER_TYPE] = usertype
+                intent = FarmerActivity.newIntent(this).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            }
+            "Agrovet" -> {
+                val prefs = customPrefs(this)
+                prefs[PREF_USER_TYPE] = usertype
+                intent = AgrovetActivity.newIntent(this).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            }
+            "Agent" -> {
+                val prefs = customPrefs(this)
+                prefs[PREF_USER_TYPE] = usertype
+                intent = AgentActivity.newIntent(this).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            }
+            "Admin" -> {
+                val prefs = customPrefs(this)
+                prefs[PREF_USER_TYPE] = usertype
+                intent = AdminActivity.newIntent(this).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            }
         }
+
         startActivity(intent)
         finish()
     }
