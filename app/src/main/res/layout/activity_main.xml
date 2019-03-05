@@ -17,7 +17,7 @@
                 style="?android:actionBarStyle"
                 android:layout_alignParentTop="true"
                 android:background="@color/colorPrimary"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+                android:theme="@style/Toolbar.Light"/>
 
         <com.marketgate.adapters.NoSwipePager
                 android:id="@+id/noSwipePager"

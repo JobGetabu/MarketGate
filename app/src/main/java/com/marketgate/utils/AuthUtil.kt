@@ -3,6 +3,7 @@ package com.marketgate.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.ColorRes
@@ -77,3 +78,4 @@ fun toSec(millisUntilFinished: Long): String {
     // Facade Design Pattern
     return ContextCompat.getColor(ctx, color)
 }
+

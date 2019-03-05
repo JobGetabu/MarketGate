@@ -1,12 +1,16 @@
 package com.marketgate.activities
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification
+import com.google.firebase.auth.FirebaseAuth
 import com.marketgate.R
 import com.marketgate.adapters.BottomBarAdapter
 import com.marketgate.fragments.FarmAgency
@@ -27,7 +31,11 @@ class FarmerActivity : AppCompatActivity(){
         private const val AGENCY = "Agency"
         private const val NEWS = "News"
         private const val PROFILE = "Profile"
+
+        fun newIntent(context: Context): Intent =
+            Intent(context, FarmerActivity::class.java)
     }
+
 
     private lateinit var farmHome: FarmHome
     private var farmNews: FarmNews? = null
@@ -35,13 +43,18 @@ class FarmerActivity : AppCompatActivity(){
     private lateinit var farmAgency: FarmAgency
     private lateinit var adapter: BottomBarAdapter
 
+    //firebase
+    private lateinit var mAuth: FirebaseAuth
+
     private val notificationVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.marketgate.R.layout.activity_main)
+        setSupportActionBar(toolbar)
 
-        //launchActivity(LoginActivity::class.java)
+        //mAuth = FirebaseAuth.getInstance()
+
 
         initViews()
     }
@@ -71,7 +84,7 @@ class FarmerActivity : AppCompatActivity(){
         farmProfile = FarmProfile()
 
         adapter.addFragments(farmHome)
-        adapter.addFragments(farmNews)
+        //adapter.addFragments(farmNews)
         adapter.addFragments(farmAgency)
         adapter.addFragments(farmProfile)
 
@@ -123,6 +136,22 @@ class FarmerActivity : AppCompatActivity(){
         //translucent bottom navigation
         bottomNav.isTranslucentNavigationEnabled = true
 
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_logout, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_signout) {
+            //mAuth.signOut()
+            launchActivity(LoginActivity::class.java)
+            finish()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private var onTabSelectedListener: AHBottomNavigation.OnTabSelectedListener =

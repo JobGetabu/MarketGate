@@ -52,4 +52,9 @@
         <item name="listPreferredItemHeightSmall">60dp</item>
     </style>
 
+    <style name="Toolbar.Light" parent="@style/AppTheme">
+        <item name="colorControlNormal">@color/grey_60</item>
+        <item name="android:textColorPrimary">@color/milkWhite</item>
+    </style>
+
 </resources>
