@@ -30,7 +30,7 @@ fun ImageView.loadUrl(url: Int) {
         .into(this)
 }
 
-fun ImageView.loadUrl(url: String) {
+fun ImageView.loadUrl(url: String?) {
     Glide.with(context)
         .load(url)
         .apply(RequestOptions().placeholder(R.drawable.avatar_placeholder))

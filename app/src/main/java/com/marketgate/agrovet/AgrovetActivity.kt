@@ -8,6 +8,7 @@ import com.marketgate.R
 
 class AgrovetActivity : AppCompatActivity() {
 
+
     companion object {
         private const val HOME = "Farmer"
         private const val PRODUCT = "Product"
@@ -18,6 +19,7 @@ class AgrovetActivity : AppCompatActivity() {
         fun newIntent(context: Context): Intent =
             Intent(context, AgrovetActivity::class.java)
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

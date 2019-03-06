@@ -12,8 +12,8 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification
 import com.google.firebase.auth.FirebaseAuth
 import com.marketgate.R
-import com.marketgate.core.LoginActivity
 import com.marketgate.adapters.BottomBarAdapter
+import com.marketgate.core.LoginActivity
 import com.marketgate.utils.fetchColor
 import com.marketgate.utils.fetchDrawable
 import com.marketgate.utils.fetchString
@@ -45,12 +45,20 @@ class FarmerActivity : AppCompatActivity(){
 
     private val notificationVisible = false
 
+    override fun onStart() {
+        super.onStart()
+        if(mAuth.currentUser == null){
+            launchActivity(LoginActivity::class.java)
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.marketgate.R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        //mAuth = FirebaseAuth.getInstance()
+        mAuth = FirebaseAuth.getInstance()
 
 
         initViews()
