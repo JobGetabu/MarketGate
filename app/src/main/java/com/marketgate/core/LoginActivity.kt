@@ -12,12 +12,17 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 import com.marketgate.R
 import com.marketgate.admin.AdminActivity
 import com.marketgate.agent.AgentActivity
 import com.marketgate.agrovet.AgrovetActivity
 import com.marketgate.farmer.FarmerActivity
+import com.marketgate.models.USER_FARMER
+import com.marketgate.models.UserFarmer
 import com.marketgate.utils.GoogleLoginCallback
+import com.marketgate.utils.GoogleSignInApiUtils.getUserData
 import com.marketgate.utils.LoaderDialogue
 import com.marketgate.utils.LoaderDialogue.DIA_TITLE
 import com.marketgate.utils.LoaderDialogue.DIA_TXT
@@ -31,8 +36,10 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
 
     private lateinit var loader: LoaderDialogue
     private  var TAG: String = "login"
-    private lateinit var auth: FirebaseAuth
     private lateinit var usertype: String
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     override val googleApiClient: GoogleSignInOptions by lazy {
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -51,6 +58,7 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
 
         //firebase
         auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
 
         loginFarmer.setOnClickListener {
@@ -115,7 +123,7 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
 
-                    //TODO: save to DB
+                    saveUser(user,account)
 
                     goToHome(usertype)
                 } else {
@@ -173,5 +181,20 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
 
         startActivity(intent)
         finish()
+    }
+
+    private fun saveUser(user: FirebaseUser?, account: GoogleSignInAccount){
+        firestore.collection(USER_FARMER).document(user!!.uid).get()
+            .addOnCompleteListener {
+                val result = it.result
+                if (!result!!.exists()){
+
+                    val n = getUserData(account)
+                    val userFarmer = UserFarmer(n.username,true,false,false,true,"Market Gate",
+                        n.photoUrl,n.email,"",null,"Nairobi CBD",null,user.uid )
+
+                    firestore.collection(USER_FARMER).document(user.uid).set(userFarmer)
+                }
+            }
     }
 }
