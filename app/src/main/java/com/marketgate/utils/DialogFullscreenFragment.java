@@ -35,6 +35,8 @@ public class DialogFullscreenFragment extends DialogFragment {
     private static final int REQUEST_IMAGE = 100;
     public CallbackResult callbackResult;
     private Uri mUri;
+    private Bitmap bitmap;
+    String title;
 
     public void setOnCallbackResult(final CallbackResult callbackResult) {
         this.callbackResult = callbackResult;
@@ -91,7 +93,7 @@ public class DialogFullscreenFragment extends DialogFragment {
         UserFarmerProduct userFarmerProduct = new UserFarmerProduct(name, type, "", null, units, price, descripction, userid);
 
         if (callbackResult != null) {
-            callbackResult.sendResult(request_code, userFarmerProduct);
+            callbackResult.sendResult(request_code, userFarmerProduct, bitmap , title);
         }
     }
 
@@ -109,7 +111,7 @@ public class DialogFullscreenFragment extends DialogFragment {
 
 
     public interface CallbackResult {
-        void sendResult(int requestCode, Object obj);
+        void sendResult(int requestCode, UserFarmerProduct obj, Bitmap bitmap, String title );
     }
 
     private void onProfileImageClick() {
@@ -182,7 +184,8 @@ public class DialogFullscreenFragment extends DialogFragment {
                 Uri uri = data.getParcelableExtra("path");
                 try {
                     // You can update this bitmap to your server
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                    bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                    title = MediaStore.Images.Media.TITLE;
 
                     // loading profile image from local cache
                     loadImage(uri, bitmap);
