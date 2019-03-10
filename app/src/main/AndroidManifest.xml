@@ -14,6 +14,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".farmer.ProdDetailsActivity">
+        </activity>
         <activity android:name=".agrovet.AgrovetActivity">
         </activity>
         <activity android:name=".agent.AgentActivity">
@@ -39,16 +41,12 @@
 
         <meta-data
                 android:name="preloaded_fonts"
-                android:resource="@array/preloaded_fonts"/>
-
-        <!-- uCrop cropping activity -->
+                android:resource="@array/preloaded_fonts"/> <!-- uCrop cropping activity -->
         <activity
                 android:name="com.yalantis.ucrop.UCropActivity"
                 android:screenOrientation="portrait"
-                android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".utils.ImagePickerActivity" />
-
-        <!-- cache directory file provider paths -->
+                android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".utils.ImagePickerActivity"/> <!-- cache directory file provider paths -->
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.provider"
@@ -56,14 +54,12 @@
                 android:grantUriPermissions="true">
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_provider" />
+                    android:resource="@xml/file_provider"/>
         </provider>
-
         <provider
-                android:authorities="${applicationId}.provider"
                 android:name=".utils.LocalStorageProvider"
+                android:authorities="${applicationId}.provider"
                 android:exported="false"/>
-
     </application>
 
 </manifest>
