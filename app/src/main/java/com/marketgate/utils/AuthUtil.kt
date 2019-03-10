@@ -3,12 +3,14 @@ package com.marketgate.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +21,26 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.marketgate.R
 import com.tapadoo.alerter.Alerter
 
+
+public fun showPopup(view: View,context: Context, docId: String?) {
+    var popup: PopupMenu? = null
+    popup = PopupMenu(context, view)
+    popup.inflate(R.menu.menu_list)
+
+    popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+
+        when (item!!.itemId) {
+            R.id.menu_l_del -> {
+                Toast.makeText(context, docId, Toast.LENGTH_SHORT).show()
+            }
+            R.id.menu_l_view -> {
+                Toast.makeText(context, docId, Toast.LENGTH_SHORT).show()
+            }
+        }
+        true
+    })
+    popup.show()
+}
 
 fun showShortSnackbar(s:String, view: View){
     Snackbar.make(

@@ -79,18 +79,18 @@ public class DialogFullscreenFragment extends DialogFragment {
         String picurl = "";
         String descripction = pDescription.getText().toString();
         String type = pType.getText().toString();
-        double price = 0;
-        double units = 0;
+        int price = 0;
+        int units = 0;
         if (!TextUtils.isEmpty(pPrice.getText().toString())) {
 
-            price = Double.valueOf(pPrice.getText().toString());
+            price = Integer.valueOf(pPrice.getText().toString());
         }
         if (!TextUtils.isEmpty(pUnits.getText().toString())) {
-            units = Double.valueOf(pUnits.getText().toString());
+            units = Integer.valueOf(pUnits.getText().toString());
         }
         String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        UserFarmerProduct userFarmerProduct = new UserFarmerProduct(name, type, "", "", units, price, descripction, userid);
+        UserFarmerProduct userFarmerProduct = new UserFarmerProduct(name, type, "", "","", units, price, descripction, userid);
 
         if (callbackResult != null) {
             if (name.isEmpty()) {

@@ -15,6 +15,7 @@
             android:src="@drawable/bg_no_item_cactus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
@@ -31,6 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -54,7 +56,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:visibility="gone"
+            android:visibility="visible"
             android:clipToPadding="false"
             android:scrollbars="none"
             android:scrollingCache="true">
@@ -77,7 +79,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="New Agents"
+                        android:text="My Product"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -96,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="@dimen/spacing_medium"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     android:visibility="visible"
                     tools:item="@layout/single_product"/>
 
@@ -129,6 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     android:padding="@dimen/spacing_medium"
                     android:visibility="visible"
                     tools:items="@layout/single_small_product"/>
@@ -145,7 +149,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Top Rated"
+                        android:text="Top Produce"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -163,6 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     android:padding="@dimen/spacing_medium"
                     android:visibility="visible"
                     tools:item="@layout/single_product"/>
