@@ -36,7 +36,7 @@ public class DialogFullscreenFragment extends DialogFragment {
     public CallbackResult callbackResult;
     private Uri mUri;
     private Bitmap bitmap;
-    String title;
+    String title = "";
 
     public void setOnCallbackResult(final CallbackResult callbackResult) {
         this.callbackResult = callbackResult;
@@ -80,21 +80,24 @@ public class DialogFullscreenFragment extends DialogFragment {
         String descripction = pDescription.getText().toString();
         String type = pType.getText().toString();
         double price = 0;
-        double units;
+        double units = 0;
         if (!TextUtils.isEmpty(pPrice.getText().toString())) {
 
-             price = Double.valueOf(pPrice.getText().toString());
+            price = Double.valueOf(pPrice.getText().toString());
         }
-        if (!TextUtils.isEmpty(pUnits.getText().toString())) ;
-        {
-             units = Double.valueOf(pUnits.getText().toString());
+        if (!TextUtils.isEmpty(pUnits.getText().toString())) {
+            units = Double.valueOf(pUnits.getText().toString());
         }
         String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         UserFarmerProduct userFarmerProduct = new UserFarmerProduct(name, type, "", "", units, price, descripction, userid);
 
         if (callbackResult != null) {
-            callbackResult.sendResult(request_code, userFarmerProduct, bitmap , title);
+            if (name.isEmpty()) {
+                dismiss();
+                return;
+            }
+            callbackResult.sendResult(request_code, userFarmerProduct, bitmap, title);
         }
     }
 
@@ -112,7 +115,7 @@ public class DialogFullscreenFragment extends DialogFragment {
 
 
     public interface CallbackResult {
-        void sendResult(int requestCode, UserFarmerProduct obj, Bitmap bitmap, String title );
+        void sendResult(int requestCode, UserFarmerProduct obj, Bitmap bitmap, String title);
     }
 
     private void onProfileImageClick() {

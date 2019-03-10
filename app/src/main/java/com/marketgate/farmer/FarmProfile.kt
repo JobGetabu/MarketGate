@@ -11,7 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.marketgate.R
 import com.marketgate.models.USER_FARMER
 import com.marketgate.models.UserFarmer
-import com.marketgate.utils.showShortSnackbar
+import com.marketgate.utils.showAlert
 import com.raiachat.util.loadUrl
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -25,6 +25,7 @@ class FarmProfile : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var activity: FarmerActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +40,7 @@ class FarmProfile : Fragment() {
         //firebase
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+        activity = getActivity() as FarmerActivity
 
         setUI()
 
@@ -71,7 +73,7 @@ class FarmProfile : Fragment() {
                 "locationstring",profile_location.editText!!.text.toString(),
             "cooperativename",profile_coop.editText!!.text.toString())
             .addOnSuccessListener {
-                showShortSnackbar("Profile updated",farmprofile_main)
+                showAlert(activity,"Success","Profile updated")
             }
     }
 

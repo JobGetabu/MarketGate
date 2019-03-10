@@ -114,7 +114,8 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
     }
 
     private fun dismissProgressDialog(){
-        loader.dismiss()
+        if(loader.isAdded && loader.isVisible)
+           loader.dismiss()
     }
 
 
@@ -154,7 +155,7 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
 
     private fun goToHome(usertype: String) {
 
-        dismissProgressDialog()
+         dismissProgressDialog()
         var intent : Intent? = null
 
         when(usertype){
