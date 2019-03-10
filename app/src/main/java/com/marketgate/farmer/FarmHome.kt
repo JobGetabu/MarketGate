@@ -16,8 +16,9 @@ import com.marketgate.models.USER_FARMER_FILE
 import com.marketgate.models.USER_FARMER_Product
 import com.marketgate.models.UserFarmerProduct
 import com.marketgate.utils.DialogFullscreenFragment
-import com.marketgate.utils.showShortSnackbar
+import com.marketgate.utils.showAlert
 import kotlinx.android.synthetic.main.fragment_farm_home.*
+import java.io.ByteArrayOutputStream
 
 private const val DIALOG_QUEST_CODE = 100
 
@@ -30,6 +31,7 @@ class FarmHome : Fragment() {
     //firebase
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var activity: FarmerActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +47,7 @@ class FarmHome : Fragment() {
         //firebase
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+        activity = getActivity() as FarmerActivity
 
         farmhome_add.setOnClickListener { showDialogFullscreen() }
     }
@@ -67,13 +70,36 @@ class FarmHome : Fragment() {
     private fun saveProduct(obj: UserFarmerProduct, bitmap: Bitmap?, title: String) {
 
         if (bitmap == null){
-            firestore.collection(USER_FARMER_Product).document(auth.currentUser!!.uid)
+            val id = firestore.collection(USER_FARMER_Product).id
+            obj.productid = id
+            firestore.collection(USER_FARMER_Product).document(id)
                 .set(obj)
-                .addOnSuccessListener { showShortSnackbar("Product added",farmhome_main) }
+                .addOnSuccessListener { showAlert(activity,"Success","Product added") }
 
         }else{
+            val prodImagesRef = FirebaseStorage.getInstance().reference.child(USER_FARMER_FILE+title)
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
 
-            val mountainImagesRef = FirebaseStorage.getInstance().reference.child(USER_FARMER_FILE+title)
+            var uploadTask = prodImagesRef.putBytes(data)
+            uploadTask.addOnFailureListener {
+                // Handle unsuccessful uploads
+                showAlert(activity,"Error","Product not uploaded")
+            }.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val downloadUri = task.result
+                    val id = firestore.collection(USER_FARMER_Product).id
+                    obj.productid = id
+                    obj.photourl = downloadUri.toString()
+                    firestore.collection(USER_FARMER_Product).document(id)
+                        .set(obj)
+                        .addOnSuccessListener {  showAlert(activity,"Success","Product added") }
+                } else {
+                    showAlert(activity,"Error","Product not uploaded")
+
+                }
+            }
         }
     }
 

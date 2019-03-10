@@ -22,8 +22,8 @@ data class UserFarmer(
 data class UserFarmerProduct(
     val productname: String = "",
     val producttype: String? = "",
-    val productid: String = "",
-    val photourl: List<String>? = emptyList(),
+    var productid: String = "",
+    var photourl: String = "",
     val units: Number = 0,
     val priceindex: Number = 0,
     var productdescription: String = "",

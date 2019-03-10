@@ -3,7 +3,6 @@ package com.marketgate.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.ColorRes
@@ -17,6 +16,8 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.marketgate.R
+import com.tapadoo.alerter.Alerter
 
 
 fun showShortSnackbar(s:String, view: View){
@@ -24,6 +25,14 @@ fun showShortSnackbar(s:String, view: View){
         view,
         s,
         Snackbar.LENGTH_LONG)
+}
+
+fun showAlert(activity: Activity,title: String,subtitle:String){
+    Alerter.create(activity)
+        .setTitle(title)
+        .setText(subtitle)
+        .setBackgroundColorRes(R.color.colorAccent) // or setBackgroundColorInt(Color.CYAN)
+        .show()
 }
 
 fun showLongSnackbar(s:String, view: View, actionStringId: Int = com.marketgate.R.string.retry, listener: View.OnClickListener){

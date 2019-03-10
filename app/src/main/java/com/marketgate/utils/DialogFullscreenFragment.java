@@ -45,7 +45,7 @@ public class DialogFullscreenFragment extends DialogFragment {
     private int request_code = 0;
     private View root_view;
 
-    private ImageView productPic;
+    private ImageView productPic, three_passport2;
     private EditText pName, pDescription, pUnits, pPrice, pType;
 
 
@@ -56,6 +56,7 @@ public class DialogFullscreenFragment extends DialogFragment {
 
 
         productPic = root_view.findViewById(R.id.d_product_pic);
+        three_passport2 = root_view.findViewById(R.id.three_passport2);
         pName = root_view.findViewById(R.id.d_prname);
         pDescription = root_view.findViewById(R.id.d_pr_unitdes);
         pPrice = root_view.findViewById(R.id.d_pr_unitprice);
@@ -90,7 +91,7 @@ public class DialogFullscreenFragment extends DialogFragment {
         }
         String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        UserFarmerProduct userFarmerProduct = new UserFarmerProduct(name, type, "", null, units, price, descripction, userid);
+        UserFarmerProduct userFarmerProduct = new UserFarmerProduct(name, type, "", "", units, price, descripction, userid);
 
         if (callbackResult != null) {
             callbackResult.sendResult(request_code, userFarmerProduct, bitmap , title);
@@ -200,6 +201,7 @@ public class DialogFullscreenFragment extends DialogFragment {
         mUri = uri;
         productPic.setScaleType(ImageView.ScaleType.CENTER_CROP);
         productPic.setImageURI(mUri);
+        three_passport2.setVisibility(View.GONE);
     }
 
 }

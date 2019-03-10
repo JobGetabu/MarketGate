@@ -26,6 +26,7 @@ import com.marketgate.utils.GoogleSignInApiUtils.getUserData
 import com.marketgate.utils.LoaderDialogue
 import com.marketgate.utils.LoaderDialogue.DIA_TITLE
 import com.marketgate.utils.LoaderDialogue.DIA_TXT
+import com.marketgate.utils.PreferenceHelper
 import com.marketgate.utils.PreferenceHelper.PREF_USER_TYPE
 import com.marketgate.utils.PreferenceHelper.customPrefs
 import com.marketgate.utils.PreferenceHelper.set
@@ -49,6 +50,14 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
     }
 
     override val googleSingInClient: GoogleSignInClient by lazy { GoogleSignIn.getClient(this, googleApiClient) }
+
+    override fun onStart() {
+        super.onStart()
+        val prefs=PreferenceHelper.customPrefs(this)
+
+        usertype =  prefs.getString(PREF_USER_TYPE,"")
+        if (usertype != "") goToHome( usertype)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
