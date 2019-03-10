@@ -51,10 +51,10 @@ class FarmProfile : Fragment() {
         firestore.collection(USER_FARMER).document(user!!.uid).get()
             .addOnCompleteListener {
                 if (it.isSuccessful){
-                    val userFarmer  = it.result!!.toObject(UserFarmer::class.java)
+                    val userFarmer  = it.result!!.toObject(UserFarmer::class.java) ?: return@addOnCompleteListener
 
-                    profile_image.loadUrl(userFarmer?.photourl)
-                    profile_fullname.editText!!.setText( userFarmer!!.name)
+                    profile_image.loadUrl(userFarmer.photourl)
+                    profile_fullname.editText!!.setText( userFarmer.name)
                     profile_coop.editText!!.setText( userFarmer.cooperativename)
                     profile_location.editText!!.setText( userFarmer.locationstring)
                     profile_selling.isChecked = userFarmer.sellingstatus
@@ -66,14 +66,12 @@ class FarmProfile : Fragment() {
         val user = auth.currentUser
 
         firestore.collection(USER_FARMER).document(user!!.uid)
-            .update("name",profile_fullname.editText!!.text,
+            .update("name",profile_fullname.editText!!.text.toString(),
                 "sellingstatus",profile_selling.isChecked,
-                "locationstring",profile_location.editText!!.text,
-            "cooperativename",profile_coop.editText!!.text)
-            .addOnCompleteListener {
-                if (it.isSuccessful){
-                   showShortSnackbar("Profile updated",farmprofile_main)
-                }
+                "locationstring",profile_location.editText!!.text.toString(),
+            "cooperativename",profile_coop.editText!!.text.toString())
+            .addOnSuccessListener {
+                showShortSnackbar("Profile updated",farmprofile_main)
             }
     }
 

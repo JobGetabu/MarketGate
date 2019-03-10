@@ -14,7 +14,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/toolbar"
-                style="?android:actionBarStyle"
+                app:titleTextColor="@color/milkWhite"
                 android:layout_alignParentTop="true"
                 android:background="@color/colorPrimary"
                 android:theme="@style/Toolbar.Light"/>
