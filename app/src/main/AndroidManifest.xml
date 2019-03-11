@@ -47,7 +47,13 @@
                 android:name="com.yalantis.ucrop.UCropActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".utils.ImagePickerActivity"/> <!-- cache directory file provider paths -->
+        <activity android:name=".utils.ImagePickerActivity"/>
+
+        <activity android:name=".core.IntroActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+
+        <!-- cache directory file provider paths -->
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.provider"
