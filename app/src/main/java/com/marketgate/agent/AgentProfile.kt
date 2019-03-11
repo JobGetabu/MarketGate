@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.marketgate.R
-import com.marketgate.models.USER_FARMER
-import com.marketgate.models.UserFarmer
+import com.marketgate.models.USER_AGENT
+import com.marketgate.models.UserAgent
 import com.marketgate.utils.showAlert
 import com.raiachat.util.loadUrl
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -52,16 +52,16 @@ class AgentProfile : Fragment() {
 
         profile_selling.text = "Are you procuring farmers"
 
-        firestore.collection(USER_FARMER).document(user!!.uid).get()
+        firestore.collection(USER_AGENT).document(user!!.uid).get()
             .addOnCompleteListener {
                 if (it.isSuccessful){
-                    val userFarmer  = it.result!!.toObject(UserFarmer::class.java) ?: return@addOnCompleteListener
+                    val user  = it.result!!.toObject(UserAgent::class.java) ?: return@addOnCompleteListener
 
-                    profile_image.loadUrl(userFarmer.photourl)
-                    profile_fullname.editText!!.setText( userFarmer.name)
-                    profile_coop.editText!!.setText( userFarmer.cooperativename)
-                    profile_location.editText!!.setText( userFarmer.locationstring)
-                    profile_selling.isChecked = userFarmer.sellingstatus
+                    profile_image.loadUrl(user.photourl)
+                    profile_fullname.editText!!.setText( user.name)
+                    profile_coop.editText!!.setText( user.cooperativename)
+                    profile_location.editText!!.setText( user.locationstring)
+                    profile_selling.isChecked = user.buyingstatus
                 }
             }
     }
@@ -69,9 +69,9 @@ class AgentProfile : Fragment() {
     private fun updateUser() {
         val user = auth.currentUser
 
-        firestore.collection(USER_FARMER).document(user!!.uid)
+        firestore.collection(USER_AGENT).document(user!!.uid)
             .update("name",profile_fullname.editText!!.text.toString(),
-                "sellingstatus",profile_selling.isChecked,
+                "buyingstatus",profile_selling.isChecked,
                 "locationstring",profile_location.editText!!.text.toString(),
             "cooperativename",profile_coop.editText!!.text.toString())
             .addOnSuccessListener {
