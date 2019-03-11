@@ -18,7 +18,11 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.firestore.FirebaseFirestore
 import com.marketgate.R
+import com.marketgate.farmer.ProdDetailsActivity
+import com.marketgate.farmer.ProdDetailsActivity.Companion.DOC_ID_EXTRA
+import com.marketgate.models.USER_FARMER_Product
 import com.tapadoo.alerter.Alerter
 
 
@@ -31,10 +35,13 @@ public fun showPopup(view: View,context: Context, docId: String?) {
 
         when (item!!.itemId) {
             R.id.menu_l_del -> {
-                Toast.makeText(context, docId, Toast.LENGTH_SHORT).show()
+                FirebaseFirestore.getInstance().collection(USER_FARMER_Product).document(docId!!).delete()
             }
             R.id.menu_l_view -> {
-                Toast.makeText(context, docId, Toast.LENGTH_SHORT).show()
+                val intent = ProdDetailsActivity.newIntent(context).apply {
+                    putExtra(DOC_ID_EXTRA, docId)
+                }
+                context.startActivity(intent)
             }
         }
         true

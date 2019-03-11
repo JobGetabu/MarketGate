@@ -14,7 +14,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".farmer.ProdDetailsActivity">
+        <activity android:name=".farmer.ProdDetailsActivity"
+                android:theme="@style/AppTheme.TransparentTheme">
         </activity>
         <activity android:name=".agrovet.AgrovetActivity">
         </activity>

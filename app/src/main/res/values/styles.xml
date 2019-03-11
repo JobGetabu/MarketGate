@@ -43,6 +43,13 @@
         <item name="android:windowExitAnimation">@transition/explode</item>
     </style>
 
+    <style name="AppTheme.TransparentTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
     <style name="TextAppearance.Medium.Bold" parent="@style/TextAppearance.AppCompat.Medium">
         <item name="android:textStyle">bold</item>
     </style>

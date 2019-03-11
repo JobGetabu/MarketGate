@@ -23,10 +23,7 @@ class ProductViewHolder(itemView: View, listener: OnRecyclerItemClickListener?) 
 
     init {
         listener?.run {
-            //itemView.setOnClickListener { onItemClick(adapterPosition) }
             menuV?.setOnClickListener {
-
-                adapterPosition
                 showPopup(menuV,menuV.context,product?.id)
                 onItemClick(adapterPosition) }
         }
