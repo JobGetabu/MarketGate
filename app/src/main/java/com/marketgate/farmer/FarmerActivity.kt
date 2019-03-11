@@ -151,7 +151,7 @@ class FarmerActivity : AppCompatActivity(){
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_signout) {
-            //mAuth.signOut()
+            mAuth.signOut()
             launchActivity(LoginActivity::class.java)
             finish()
         }
