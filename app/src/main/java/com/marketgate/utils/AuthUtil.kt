@@ -42,7 +42,8 @@ fun showPopup(view: View, context: Context, docId: String?) {
 
         when (item!!.itemId) {
             R.id.menu_l_del -> {
-                FirebaseFirestore.getInstance().collection(USER_FARMER_Product).document(docId!!).delete()
+                if (docId != null)
+                FirebaseFirestore.getInstance().collection(USER_FARMER_Product).document(docId).delete()
                     .addOnSuccessListener { Toast.makeText(context,"Deleted !",Toast.LENGTH_SHORT).show() }
             }
             R.id.menu_l_view -> {

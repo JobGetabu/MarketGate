@@ -19,8 +19,7 @@ import com.marketgate.admin.AdminActivity
 import com.marketgate.agent.AgentActivity
 import com.marketgate.agrovet.AgrovetActivity
 import com.marketgate.farmer.FarmerActivity
-import com.marketgate.models.USER_FARMER
-import com.marketgate.models.UserFarmer
+import com.marketgate.models.*
 import com.marketgate.utils.GoogleLoginCallback
 import com.marketgate.utils.GoogleSignInApiUtils.getUserData
 import com.marketgate.utils.LoaderDialogue
@@ -33,10 +32,10 @@ import com.marketgate.utils.PreferenceHelper.set
 import kotlinx.android.synthetic.main.login_prompt.*
 
 
-class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
+class LoginActivity : AppCompatActivity(), GoogleLoginCallback {
 
     private lateinit var loader: LoaderDialogue
-    private  var TAG: String = "login"
+    private var TAG: String = "login"
     private lateinit var usertype: String
 
     private lateinit var auth: FirebaseAuth
@@ -53,10 +52,10 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
 
     override fun onStart() {
         super.onStart()
-        val prefs=PreferenceHelper.customPrefs(this)
+        val prefs = PreferenceHelper.customPrefs(this)
 
-        usertype =  prefs.getString(PREF_USER_TYPE,"")
-        if (usertype != "") goToHome( usertype)
+        usertype = prefs.getString(PREF_USER_TYPE, "")
+        if (usertype != "") goToHome(usertype)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,25 +70,25 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
 
 
         loginFarmer.setOnClickListener {
-            showProgress("Login in...","Accessing farmers account")
+            showProgress("Login in...", "Accessing farmers account")
             usertype = "Farmer"
             logInWithGoogle(this)
         }
 
         loginAgent.setOnClickListener {
-            showProgress("Login in...","Accessing agent account")
+            showProgress("Login in...", "Accessing agent account")
             usertype = "Agent"
             logInWithGoogle(this)
         }
 
         loginAgrovet.setOnClickListener {
-            showProgress("Login in...","Accessing agrovet account")
+            showProgress("Login in...", "Accessing agrovet account")
             usertype = "Agrovet"
             logInWithGoogle(this)
         }
 
         loginAdmin.setOnClickListener {
-            showProgress("Login in...","Accessing admin account")
+            showProgress("Login in...", "Accessing admin account")
             usertype = "Admin"
             logInWithGoogle(this)
         }
@@ -102,7 +101,7 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
         overridePendingTransition(com.marketgate.R.anim.fade_out, com.marketgate.R.anim.fade_in)
     }
 
-    private fun showProgress(title: String = "",txt: String= ""){
+    private fun showProgress(title: String = "", txt: String = "") {
         val b = Bundle()
         b.putString(DIA_TITLE, title)
         b.putString(DIA_TXT, txt)
@@ -110,14 +109,13 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
         loader.setArguments(b)
 
         val tr = supportFragmentManager.beginTransaction()
-        loader.show(tr,LoaderDialogue.TAG)
+        loader.show(tr, LoaderDialogue.TAG)
     }
 
-    private fun dismissProgressDialog(){
-        if(loader.isAdded && loader.isVisible)
-           loader.dismiss()
+    private fun dismissProgressDialog() {
+        if (loader.isAdded && loader.isVisible)
+            loader.dismiss()
     }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -133,7 +131,7 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
 
-                    saveUser(user,account)
+                    saveUser(user, account)
 
                     goToHome(usertype)
                 } else {
@@ -155,10 +153,10 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
 
     private fun goToHome(usertype: String) {
 
-         dismissProgressDialog()
-        var intent : Intent? = null
+        dismissProgressDialog()
+        var intent: Intent? = null
 
-        when(usertype){
+        when (usertype) {
             "Farmer" -> {
                 val prefs = customPrefs(this)
                 prefs[PREF_USER_TYPE] = usertype
@@ -193,18 +191,72 @@ class LoginActivity : AppCompatActivity() , GoogleLoginCallback {
         finish()
     }
 
-    private fun saveUser(user: FirebaseUser?, account: GoogleSignInAccount){
-        firestore.collection(USER_FARMER).document(user!!.uid).get()
-            .addOnCompleteListener {
-                val result = it.result
-                if (!result!!.exists()){
+    private fun saveUser(user: FirebaseUser?, account: GoogleSignInAccount) {
+        when (usertype) {
 
-                    val n = getUserData(account)
-                    val userFarmer = UserFarmer(n.username,true,false,false,true,"Market Gate",
-                        n.photoUrl,n.email,"",null,"Nairobi CBD",null,user.uid )
+            "Farmer" -> {
+                firestore.collection(USER_FARMER).document(user!!.uid).get()
+                    .addOnCompleteListener {
+                        val result = it.result
+                        if (!result!!.exists()) {
 
-                    firestore.collection(USER_FARMER).document(user.uid).set(userFarmer)
-                }
+                            val n = getUserData(account)
+                            val userFarmer = UserFarmer(
+                                n.username, true, false, false, true, "Market Gate",
+                                n.photoUrl, n.email, "", null, "Nairobi CBD", null, user.uid
+                            )
+
+                            firestore.collection(USER_FARMER).document(user.uid).set(userFarmer)
+                        }
+                    }
             }
+            "Agrovet" -> {
+                firestore.collection(USER_AGROVET).document(user!!.uid).get()
+                    .addOnCompleteListener {
+                        val result = it.result
+                        if (!result!!.exists()) {
+
+                            val n = getUserData(account)
+                            val userAgrovet = UserAgrovet(
+                                n.username, true, false, false, true, "Market Gate Agrovet",
+                                n.photoUrl, n.email, "", null, "Mombasa Near Hibernet", user.uid
+                            )
+
+                            firestore.collection(USER_AGROVET).document(user.uid).set(userAgrovet)
+                        }
+                    }
+            }
+            "Agent" -> {
+                firestore.collection(USER_AGENT).document(user!!.uid).get()
+                    .addOnCompleteListener {
+                        val result = it.result
+                        if (!result!!.exists()) {
+
+                            val n = getUserData(account)
+                            val userAgent = UserAgent(
+                                n.username, true, false, false, true, "Market Gate Agent",
+                                n.photoUrl, n.email, "", null, "Nyeri Farm Near Tomcat", user.uid
+                            )
+
+                            firestore.collection(USER_AGENT).document(user.uid).set(userAgent)
+                        }
+                    }
+            }
+            "Admin" -> {
+                firestore.collection(USER_ADMIN).document(user!!.uid).get()
+                    .addOnCompleteListener {
+                        val result = it.result
+                        if (!result!!.exists()) {
+
+                            val n = getUserData(account)
+                            val userAdmin = UserAdmin(
+                                n.username, n.photoUrl, n.email, userid = user.uid
+                            )
+
+                            firestore.collection(USER_ADMIN).document(user.uid).set(userAdmin)
+                        }
+                    }
+            }
+        }
     }
 }

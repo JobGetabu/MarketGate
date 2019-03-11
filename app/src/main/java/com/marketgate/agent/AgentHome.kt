@@ -1,4 +1,4 @@
-package com.marketgate.farmer
+package com.marketgate.agent
 
 
 import android.graphics.Bitmap
@@ -19,11 +19,14 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.leodroidcoder.genericadapter.OnRecyclerItemClickListener
 import com.marketgate.R
+import com.marketgate.farmer.ProductAdapter
+import com.marketgate.farmer.SmallProductAdapter
 import com.marketgate.models.USER_FARMER_FILE
 import com.marketgate.models.USER_FARMER_Product
 import com.marketgate.models.UserFarmerProduct
 import com.marketgate.utils.DialogFullscreenFragment
 import com.marketgate.utils.showAlert
+import com.raiachat.util.hideView
 import kotlinx.android.synthetic.main.fragment_farm_home.*
 import java.io.ByteArrayOutputStream
 
@@ -33,14 +36,14 @@ private const val DIALOG_QUEST_CODE = 100
  * A simple [Fragment] subclass.
  *
  */
-class FarmHome : Fragment(), OnRecyclerItemClickListener {
+class AgentHome : Fragment(), OnRecyclerItemClickListener {
 
-    private val TAG: String = "FarmHome"
+    private val TAG: String = "AgentHome"
     //firebase
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
-    private lateinit var activity: FarmerActivity
-    private lateinit var productAdapter1 : ProductAdapter
+    private lateinit var activity: AgentActivity
+
     private lateinit var productAdapter2 : SmallProductAdapter
     private lateinit var productAdapter3 : ProductAdapter
 
@@ -58,39 +61,20 @@ class FarmHome : Fragment(), OnRecyclerItemClickListener {
         //firebase
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
-        activity = getActivity() as FarmerActivity
+        activity = getActivity() as AgentActivity
 
-        farmhome_add.setOnClickListener { showDialogFullscreen() }
+        initView()
 
-        initTopList()
         initMiddleList()
         initBottomList()
     }
 
-    private fun initTopList() {
-
-        productAdapter1 = ProductAdapter(context!!,this)
-        farmhome_myprodList.adapter = productAdapter1
-
-        firestore.collection(USER_FARMER_Product)
-            .whereEqualTo("productid",auth.currentUser?.uid.toString())
-            .addSnapshotListener(EventListener { snapshot, firebaseFirestoreException ->
-                run {
-                    if (firebaseFirestoreException != null) {
-                        Log.w(TAG, "Listen failed.", firebaseFirestoreException)
-                        return@EventListener
-                    }
-
-                    if (snapshot != null && !snapshot.isEmpty) {
-                        Log.d(TAG, "Current data: " + snapshot.documents)
-                        val list :List<UserFarmerProduct> = snapshot.toObjects(UserFarmerProduct::class.java)
-                        productAdapter1.setItems(list)
-
-                    } else {
-                        Log.d(TAG, "Current data: null")
-                    }
-                }
-            })
+    private fun initView() {
+        label1.hideView()
+        farmhome_add.hideView()
+        farmhome_myprodList.hideView()
+        label2.text = "New Farmers"
+        label3.text = "Top Rated Farmers"
     }
 
     private fun initMiddleList() {
@@ -146,7 +130,7 @@ class FarmHome : Fragment(), OnRecyclerItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        productAdapter1.notifyDataSetChanged()
+
     }
 
 

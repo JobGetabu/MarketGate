@@ -80,6 +80,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="My Product"
+                        android:id="@+id/label1"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -115,6 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Recommended"
+                        android:id="@+id/label2"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -150,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Top Produce"
+                        android:id="@+id/label3"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
                 <com.google.android.material.button.MaterialButton
