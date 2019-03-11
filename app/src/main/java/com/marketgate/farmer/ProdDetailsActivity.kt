@@ -3,11 +3,11 @@ package com.marketgate.farmer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.marketgate.R
-import com.marketgate.agent.AgentActivity
 import com.marketgate.models.USER_FARMER_Product
 import com.marketgate.models.UserFarmerProduct
 import com.raiachat.util.loadUrl
@@ -21,7 +21,7 @@ class ProdDetailsActivity : AppCompatActivity() {
         private const val PROFILE = "Profile"
 
         fun newIntent(context: Context): Intent =
-            Intent(context, AgentActivity::class.java)
+            Intent(context, ProdDetailsActivity::class.java)
     }
 
     private lateinit var auth: FirebaseAuth
@@ -35,6 +35,7 @@ class ProdDetailsActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
         val docid = intent.getStringExtra(DOC_ID_EXTRA)
+        Log.d(TAG,"product id = $docid")
 
         setUpUI(docid!!)
     }
@@ -49,6 +50,7 @@ class ProdDetailsActivity : AppCompatActivity() {
                 d_category.text = prod.producttype
                 d_price.text = "Kes ${prod.priceindex}.00"
                 d_desc.text = prod.productdescription
+                d_units.text = "${ prod.units}"
             }
     }
 }

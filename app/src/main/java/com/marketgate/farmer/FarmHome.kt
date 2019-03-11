@@ -146,7 +146,7 @@ class FarmHome : Fragment(), OnRecyclerItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        val userFarmerProduct1 = productAdapter1.getItem(position)
+
     }
 
 

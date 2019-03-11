@@ -7,7 +7,9 @@ import android.widget.TextView
 import com.leodroidcoder.genericadapter.BaseViewHolder
 import com.leodroidcoder.genericadapter.OnRecyclerItemClickListener
 import com.marketgate.models.UserFarmerProduct
+import com.marketgate.utils.showDetails
 import com.marketgate.utils.showPopup
+import com.raiachat.util.hideView
 import com.raiachat.util.loadUrl
 import kotlinx.android.synthetic.main.single_product.view.*
 
@@ -23,9 +25,14 @@ class ProductViewHolder(itemView: View, listener: OnRecyclerItemClickListener?) 
 
     init {
         listener?.run {
+            imageV?.setOnClickListener {
+                showDetails(imageV.context, product?.id)
+            }
+
             menuV?.setOnClickListener {
-                showPopup(menuV,menuV.context,product?.id)
-                onItemClick(adapterPosition) }
+                showPopup(menuV, menuV.context, product?.id)
+                onItemClick(adapterPosition)
+            }
         }
     }
 
@@ -34,6 +41,8 @@ class ProductViewHolder(itemView: View, listener: OnRecyclerItemClickListener?) 
         nameDesTv?.text = product.productdescription
         imageV?.loadUrl(product.photourl)
         this.product = product
+
+        if (product.productid == "top") menuV?.hideView()
     }
 
 }

@@ -6,6 +6,7 @@ import android.widget.TextView
 import com.leodroidcoder.genericadapter.BaseViewHolder
 import com.leodroidcoder.genericadapter.OnRecyclerItemClickListener
 import com.marketgate.models.UserFarmerProduct
+import com.marketgate.utils.showDetails
 import com.raiachat.util.loadUrl
 import kotlinx.android.synthetic.main.single_small_product.view.*
 
@@ -20,7 +21,9 @@ class SmallProductViewHolder(itemView: View, listener: OnRecyclerItemClickListen
 
     init {
         listener?.run {
-            itemView.setOnClickListener { onItemClick(adapterPosition) }
+            imageV?.setOnClickListener {
+                showDetails(imageV.context, product?.id)
+            }
         }
     }
 

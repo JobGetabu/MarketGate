@@ -26,7 +26,14 @@ import com.marketgate.models.USER_FARMER_Product
 import com.tapadoo.alerter.Alerter
 
 
-public fun showPopup(view: View,context: Context, docId: String?) {
+fun showDetails(context: Context, docId: String?){
+    val intent = ProdDetailsActivity.newIntent(context).apply {
+        putExtra(DOC_ID_EXTRA, docId)
+    }
+    context.startActivity(intent)
+}
+
+fun showPopup(view: View, context: Context, docId: String?) {
     var popup: PopupMenu? = null
     popup = PopupMenu(context, view)
     popup.inflate(R.menu.menu_list)
@@ -36,6 +43,7 @@ public fun showPopup(view: View,context: Context, docId: String?) {
         when (item!!.itemId) {
             R.id.menu_l_del -> {
                 FirebaseFirestore.getInstance().collection(USER_FARMER_Product).document(docId!!).delete()
+                    .addOnSuccessListener { Toast.makeText(context,"Deleted !",Toast.LENGTH_SHORT).show() }
             }
             R.id.menu_l_view -> {
                 val intent = ProdDetailsActivity.newIntent(context).apply {
@@ -49,14 +57,15 @@ public fun showPopup(view: View,context: Context, docId: String?) {
     popup.show()
 }
 
-fun showShortSnackbar(s:String, view: View){
+fun showShortSnackbar(s: String, view: View) {
     Snackbar.make(
         view,
         s,
-        Snackbar.LENGTH_LONG)
+        Snackbar.LENGTH_LONG
+    )
 }
 
-fun showAlert(activity: Activity,title: String,subtitle:String){
+fun showAlert(activity: Activity, title: String, subtitle: String) {
     Alerter.create(activity)
         .setTitle(title)
         .setText(subtitle)
@@ -64,15 +73,21 @@ fun showAlert(activity: Activity,title: String,subtitle:String){
         .show()
 }
 
-fun showLongSnackbar(s:String, view: View, actionStringId: Int = com.marketgate.R.string.retry, listener: View.OnClickListener){
+fun showLongSnackbar(
+    s: String,
+    view: View,
+    actionStringId: Int = com.marketgate.R.string.retry,
+    listener: View.OnClickListener
+) {
     Snackbar.make(
         view,
         s,
-        Snackbar.LENGTH_INDEFINITE)
+        Snackbar.LENGTH_INDEFINITE
+    )
         .setAction(view.context.getString(actionStringId), listener).show()
 }
 
-fun UserAuthToastExceptions(@NonNull authtask: Task<AuthResult> , activity: Activity) {
+fun UserAuthToastExceptions(@NonNull authtask: Task<AuthResult>, activity: Activity) {
     var error: String
     try {
         throw authtask.exception!!
@@ -88,7 +103,7 @@ fun UserAuthToastExceptions(@NonNull authtask: Task<AuthResult> , activity: Acti
     }
 
     Toast.makeText(activity, error, Toast.LENGTH_LONG).show();
-   
+
 }
 
 
@@ -102,17 +117,17 @@ fun toSec(millisUntilFinished: Long): String {
     return (remainedSecs % 60).toString()
 }
 
- fun fetchDrawable(@DrawableRes mdrawable: Int, ctx: Context): Drawable? {
+fun fetchDrawable(@DrawableRes mdrawable: Int, ctx: Context): Drawable? {
     // Facade Design Pattern
     return ContextCompat.getDrawable(ctx, mdrawable)
 }
 
- fun fetchString(@StringRes mystring: Int, ctx: Context): String {
+fun fetchString(@StringRes mystring: Int, ctx: Context): String {
     // Facade Design Pattern
     return ctx.resources.getString(mystring)
 }
 
- fun fetchColor(@ColorRes color: Int, ctx: Context): Int {
+fun fetchColor(@ColorRes color: Int, ctx: Context): Int {
     // Facade Design Pattern
     return ContextCompat.getColor(ctx, color)
 }
