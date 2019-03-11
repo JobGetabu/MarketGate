@@ -20,6 +20,7 @@ import com.leodroidcoder.genericadapter.OnRecyclerItemClickListener
 import com.marketgate.R
 import com.marketgate.models.USER_AGENT
 import com.marketgate.models.UserAgent
+import com.marketgate.utils.showDetails
 import com.marketgate.utils.showProfile
 import com.raiachat.util.hideView
 import com.raiachat.util.loadUrl
