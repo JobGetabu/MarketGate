@@ -29,6 +29,7 @@ import com.marketgate.utils.PreferenceHelper
 import com.marketgate.utils.PreferenceHelper.PREF_USER_TYPE
 import com.marketgate.utils.PreferenceHelper.customPrefs
 import com.marketgate.utils.PreferenceHelper.set
+import com.marketgate.utils.showAlert
 import kotlinx.android.synthetic.main.login_prompt.*
 
 
@@ -82,12 +83,18 @@ class LoginActivity : AppCompatActivity(), GoogleLoginCallback {
         }
 
         loginAgrovet.setOnClickListener {
+            showAlert(this,"Oops !","Under Development")
+            return@setOnClickListener
+
             showProgress("Login in...", "Accessing agrovet account")
             usertype = "Agrovet"
             logInWithGoogle(this)
         }
 
         loginAdmin.setOnClickListener {
+            showAlert(this,"Oops !","Under Development")
+            return@setOnClickListener
+
             showProgress("Login in...", "Accessing admin account")
             usertype = "Admin"
             logInWithGoogle(this)
