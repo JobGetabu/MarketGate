@@ -2,6 +2,7 @@ package com.marketgate.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.view.MenuItem
 import android.view.View
@@ -20,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.marketgate.R
+import com.marketgate.core.ProfileActivity
+import com.marketgate.core.ProfileActivity.Companion.USER_ID_EXTRA
 import com.marketgate.farmer.ProdDetailsActivity
 import com.marketgate.farmer.ProdDetailsActivity.Companion.DOC_ID_EXTRA
 import com.marketgate.models.USER_FARMER_Product
@@ -30,6 +33,38 @@ fun showDetails(context: Context, docId: String?){
     val intent = ProdDetailsActivity.newIntent(context).apply {
         putExtra(DOC_ID_EXTRA, docId)
     }
+    context.startActivity(intent)
+}
+
+fun showProfile(context: Context, userId: String?){
+    val prefs = PreferenceHelper.customPrefs(context)
+
+    val usertype = prefs.getString(PreferenceHelper.PREF_USER_TYPE, "")
+    var intent: Intent? = null
+
+    when (usertype) {
+        "Farmer" -> {
+            intent = ProfileActivity.newIntent(context).apply {
+                putExtra(USER_ID_EXTRA, userId)
+            }
+        }
+        "Agrovet" -> {
+            intent = ProfileActivity.newIntent(context).apply {
+                putExtra(USER_ID_EXTRA, userId)
+            }
+        }
+        "Agent" -> {
+            intent = ProfileActivity.newIntent(context).apply {
+                putExtra(USER_ID_EXTRA, userId)
+            }
+        }
+        "Admin" -> {
+            intent = ProfileActivity.newIntent(context).apply {
+                putExtra(USER_ID_EXTRA, userId)
+            }
+        }
+    }
+
     context.startActivity(intent)
 }
 

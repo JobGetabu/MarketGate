@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.leodroidcoder.genericadapter.BaseViewHolder
 import com.leodroidcoder.genericadapter.OnRecyclerItemClickListener
 import com.marketgate.models.UserFarmer
-import com.marketgate.utils.showDetails
+import com.marketgate.utils.showProfile
 import com.raiachat.util.hideView
 import com.raiachat.util.loadUrl
 import kotlinx.android.synthetic.main.single_product.view.*
@@ -25,7 +25,7 @@ class FarmerViewHolder(itemView: View, listener: OnRecyclerItemClickListener?) :
     init {
         listener?.run {
             imageV?.setOnClickListener {
-                showDetails(imageV.context, product?.userid)
+                showProfile(imageV.context, product?.userid)
             }
 
         }

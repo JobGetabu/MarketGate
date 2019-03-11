@@ -1,30 +1,21 @@
 package com.marketgate.agent
 
 
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.google.android.gms.tasks.Continuation
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
 import com.leodroidcoder.genericadapter.OnRecyclerItemClickListener
 import com.marketgate.R
-import com.marketgate.models.*
-import com.marketgate.utils.DialogFullscreenFragment
-import com.marketgate.utils.showAlert
+import com.marketgate.models.USER_FARMER
+import com.marketgate.models.UserFarmer
 import com.raiachat.util.hideView
 import kotlinx.android.synthetic.main.fragment_farm_home.*
-import java.io.ByteArrayOutputStream
 
 private const val DIALOG_QUEST_CODE = 100
 
@@ -66,6 +57,7 @@ class AgentHome : Fragment(), OnRecyclerItemClickListener {
     }
 
     private fun initView() {
+        topLay.hideView()
         label1.hideView()
         farmhome_add.hideView()
         farmhome_myprodList.hideView()
@@ -104,7 +96,7 @@ class AgentHome : Fragment(), OnRecyclerItemClickListener {
         productAdapter3 = FarmerAdapter(context!!,this)
         farmhome_topList.adapter = productAdapter3
 
-        firestore.collection(USER_FARMER_Product)
+        firestore.collection(USER_FARMER)
             .whereEqualTo("recommended",true)
             .addSnapshotListener(EventListener { snapshot, firebaseFirestoreException ->
                 run {
@@ -126,66 +118,5 @@ class AgentHome : Fragment(), OnRecyclerItemClickListener {
     }
 
     override fun onItemClick(position: Int) {}
-
-    private fun showDialogFullscreen() {
-        val fragmentManager = fragmentManager
-        val newFragment = DialogFullscreenFragment()
-        newFragment.setRequestCode(DIALOG_QUEST_CODE)
-        val transaction = fragmentManager!!.beginTransaction()
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit()
-        newFragment.setOnCallbackResult { requestCode, obj, bitmap, title ->
-            if (requestCode == DIALOG_QUEST_CODE) {
-                //do some shit
-                saveProduct(obj,bitmap,title)
-            }
-        }
-    }
-
-    private fun saveProduct(obj: UserFarmerProduct, bitmap: Bitmap?, title: String) {
-
-        if (bitmap == null){
-            val id = firestore.collection(USER_FARMER_Product).document().id
-            obj.productid = auth.currentUser?.uid.toString()
-            obj.id = id
-            firestore.collection(USER_FARMER_Product).document(id)
-                .set(obj)
-                .addOnSuccessListener { showAlert(activity,"Success","Product added") }
-
-        }else{
-
-            val prodImagesRef = FirebaseStorage.getInstance().reference.child(USER_FARMER_FILE+title)
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val data = baos.toByteArray()
-
-            val uploadTask = prodImagesRef
-                .putBytes(data)
-
-            uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        showAlert(activity,"Error","Product not uploaded")
-                    }
-                }
-                return@Continuation prodImagesRef.downloadUrl
-            }).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val downloadUri = task.result
-                    val id = firestore.collection(USER_FARMER_Product).document().id
-                    obj.productid = auth.currentUser?.uid.toString()
-                    obj.id = id
-                    obj.photourl = downloadUri.toString()
-                    firestore.collection(USER_FARMER_Product).document(id)
-                        .set(obj)
-                        .addOnSuccessListener {  showAlert(activity,"Success","Product added") }
-
-                } else {
-                    // Handle failures
-                    showAlert(activity,"Error","Product not uploaded")
-                }
-            }
-        }
-    }
 
 }

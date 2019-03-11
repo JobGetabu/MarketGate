@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import com.marketgate.R
+import de.hdodenhof.circleimageview.CircleImageView
 
 
 inline fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT): Toast = Toast
@@ -31,6 +32,14 @@ fun ImageView.loadUrl(url: Int) {
 }
 
 fun ImageView.loadUrl(url: String?) {
+    Glide.with(context)
+        .load(url)
+        .apply(RequestOptions().placeholder(R.drawable.avatar_placeholder))
+        .thumbnail(0.05f)
+        .into(this)
+}
+
+fun CircleImageView.loadUrl(url: String?) {
     Glide.with(context)
         .load(url)
         .apply(RequestOptions().placeholder(R.drawable.avatar_placeholder))
