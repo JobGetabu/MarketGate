@@ -19,11 +19,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.leodroidcoder.genericadapter.OnRecyclerItemClickListener
 import com.marketgate.R
-import com.marketgate.farmer.ProductAdapter
-import com.marketgate.farmer.SmallProductAdapter
-import com.marketgate.models.USER_FARMER_FILE
-import com.marketgate.models.USER_FARMER_Product
-import com.marketgate.models.UserFarmerProduct
+import com.marketgate.models.*
 import com.marketgate.utils.DialogFullscreenFragment
 import com.marketgate.utils.showAlert
 import com.raiachat.util.hideView
@@ -44,8 +40,8 @@ class AgentHome : Fragment(), OnRecyclerItemClickListener {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var activity: AgentActivity
 
-    private lateinit var productAdapter2 : SmallProductAdapter
-    private lateinit var productAdapter3 : ProductAdapter
+    private lateinit var productAdapter2 : FarmerAdapter
+    private lateinit var productAdapter3 : FarmerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,11 +75,11 @@ class AgentHome : Fragment(), OnRecyclerItemClickListener {
 
     private fun initMiddleList() {
 
-        productAdapter2 = SmallProductAdapter(context!!,this)
+        productAdapter2 = FarmerAdapter(context!!,this)
         farmhome_recoList.adapter = productAdapter2
 
-        firestore.collection(USER_FARMER_Product)
-            .whereEqualTo("productid","recommended")
+        firestore.collection(USER_FARMER)
+            .whereEqualTo("new",true)
             .addSnapshotListener(EventListener { snapshot, firebaseFirestoreException ->
                 run {
                     if (firebaseFirestoreException != null) {
@@ -93,7 +89,7 @@ class AgentHome : Fragment(), OnRecyclerItemClickListener {
 
                     if (snapshot != null && !snapshot.isEmpty) {
                         Log.d(TAG, "Current data: " + snapshot.documents)
-                        val list :List<UserFarmerProduct> = snapshot.toObjects(UserFarmerProduct::class.java)
+                        val list :List<UserFarmer> = snapshot.toObjects(UserFarmer::class.java)
                         productAdapter2.setItems(list)
 
                     } else {
@@ -105,11 +101,11 @@ class AgentHome : Fragment(), OnRecyclerItemClickListener {
 
     private fun initBottomList() {
 
-        productAdapter3 = ProductAdapter(context!!,this)
+        productAdapter3 = FarmerAdapter(context!!,this)
         farmhome_topList.adapter = productAdapter3
 
         firestore.collection(USER_FARMER_Product)
-            .whereEqualTo("productid","top")
+            .whereEqualTo("recommended",true)
             .addSnapshotListener(EventListener { snapshot, firebaseFirestoreException ->
                 run {
                     if (firebaseFirestoreException != null) {
@@ -119,7 +115,7 @@ class AgentHome : Fragment(), OnRecyclerItemClickListener {
 
                     if (snapshot != null && !snapshot.isEmpty) {
                         Log.d(TAG, "Current data: " + snapshot.documents)
-                        val list :List<UserFarmerProduct> = snapshot.toObjects(UserFarmerProduct::class.java)
+                        val list :List<UserFarmer> = snapshot.toObjects(UserFarmer::class.java)
                         productAdapter3.setItems(list)
 
                     } else {
@@ -129,10 +125,7 @@ class AgentHome : Fragment(), OnRecyclerItemClickListener {
             })
     }
 
-    override fun onItemClick(position: Int) {
-
-    }
-
+    override fun onItemClick(position: Int) {}
 
     private fun showDialogFullscreen() {
         val fragmentManager = fragmentManager
