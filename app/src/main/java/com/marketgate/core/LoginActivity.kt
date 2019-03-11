@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity(), GoogleLoginCallback {
         val prefs = PreferenceHelper.customPrefs(this)
 
         usertype = prefs.getString(PREF_USER_TYPE, "")
-        if (usertype != "") goToHome(usertype)
+        if (usertype != "" && auth.currentUser != null) goToHome(usertype)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -20,7 +20,7 @@ import com.leodroidcoder.genericadapter.OnRecyclerItemClickListener
 import com.marketgate.R
 import com.marketgate.models.USER_AGENT
 import com.marketgate.models.UserAgent
-import com.marketgate.utils.showDetails
+import com.marketgate.utils.showProfile
 import com.raiachat.util.hideView
 import com.raiachat.util.loadUrl
 import kotlinx.android.synthetic.main.fragment_farm_agency.*
@@ -164,6 +164,7 @@ class AgentViewHolder(itemView: View, listener: OnRecyclerItemClickListener?) : 
 
     private val imageV: ImageView? = itemView.s_image
     private val nameTv: TextView? = itemView.s_name
+    private val desTv: TextView? = itemView.s_description
     private val menuv: ImageButton? = itemView.s_menu
 
 
@@ -172,13 +173,15 @@ class AgentViewHolder(itemView: View, listener: OnRecyclerItemClickListener?) : 
     init {
         listener?.run {
             imageV?.setOnClickListener {
-                showDetails(imageV.context, product?.userid)
+                showProfile(imageV.context, product?.userid)
             }
         }
     }
 
     override fun onBind(product: UserAgent) {
         nameTv?.text = product.name
+        desTv?.text = product.cooperativename
+
         imageV?.loadUrl(product.photourl)
         menuv?.hideView()
         this.product = product

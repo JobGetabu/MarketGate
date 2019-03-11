@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.marketgate.R
 import com.marketgate.adapters.BottomBarAdapter
 import com.marketgate.core.LoginActivity
+import com.marketgate.utils.PreferenceHelper
+import com.marketgate.utils.PreferenceHelper.set
 import com.marketgate.utils.fetchColor
 import com.marketgate.utils.fetchDrawable
 import com.marketgate.utils.fetchString
@@ -151,6 +153,8 @@ class FarmerActivity : AppCompatActivity(){
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_signout) {
+            val prefs = PreferenceHelper.customPrefs(this)
+            prefs[PreferenceHelper.PREF_USER_TYPE] = ""
             mAuth.signOut()
             launchActivity(LoginActivity::class.java)
             finish()
