@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.marketgate.R
 import com.marketgate.adapters.BottomBarAdapter
@@ -23,7 +26,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 
-class FarmerActivity : AppCompatActivity(){
+class FarmerActivity : AppCompatActivity() {
+
+
     companion object {
         private const val HOME = "Farmer"
         private const val PRODUCT = "Product"
@@ -35,6 +40,14 @@ class FarmerActivity : AppCompatActivity(){
             Intent(context, FarmerActivity::class.java)
     }
 
+    val googleApiClient: GoogleSignInOptions by lazy {
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+    }
+
+    val googleSingInClient: GoogleSignInClient by lazy { GoogleSignIn.getClient(this, googleApiClient) }
 
     private lateinit var farmHome: FarmHome
     private var farmNews: FarmNews? = null
@@ -155,6 +168,7 @@ class FarmerActivity : AppCompatActivity(){
         if (item.itemId == R.id.menu_signout) {
             val prefs = PreferenceHelper.customPrefs(this)
             prefs[PreferenceHelper.PREF_USER_TYPE] = ""
+            googleSingInClient.signOut()
             mAuth.signOut()
             launchActivity(LoginActivity::class.java)
             finish()
