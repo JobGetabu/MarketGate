@@ -6,10 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.google.gms.google-services'
 
-// Load keystore
-def keystorePropertiesFile = rootProject.file("keystore.properties")
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 
 ext.versionMajor = 1
 ext.versionMinor = 0
@@ -31,23 +28,11 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
-    signingConfigs {
-        release {
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-        }
-    }
+
 
     buildTypes {
 
-        release {
-            signingConfig signingConfigs.release
-            shrinkResources true
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+
     }
 
     packagingOptions {
