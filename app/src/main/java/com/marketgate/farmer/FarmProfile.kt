@@ -201,6 +201,6 @@ class FarmProfile : Fragment() {
             override fun onChooseGallerySelected() {
                 launchGalleryIntent()
             }
-        })
+        },"Select Profile Photo")
     }
 }
