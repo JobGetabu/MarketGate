@@ -46,7 +46,7 @@ public class DialogFullscreenFragment extends DialogFragment {
     private View root_view;
 
     private ImageView productPic, three_passport2;
-    private EditText pName, pDescription, pUnits, pPrice, pType;
+    private EditText pName, pDescription, pUnits, pPrice, pType, d_pr_loc;
 
 
     @Override
@@ -62,6 +62,7 @@ public class DialogFullscreenFragment extends DialogFragment {
         pPrice = root_view.findViewById(R.id.d_pr_unitprice);
         pUnits = root_view.findViewById(R.id.d_pr_units);
         pType = root_view.findViewById(R.id.d_pr_type);
+        d_pr_loc = root_view.findViewById(R.id.d_pr_loc);
 
         root_view.findViewById(R.id.three_passport2).setOnClickListener(v -> onProfileImageClick());
         root_view.findViewById(R.id.bt_close).setOnClickListener(v -> dismiss());
@@ -79,6 +80,7 @@ public class DialogFullscreenFragment extends DialogFragment {
         String picurl = "";
         String descripction = pDescription.getText().toString();
         String type = pType.getText().toString();
+        String loc = d_pr_loc.getText().toString();
         int price = 0;
         int units = 0;
         if (!TextUtils.isEmpty(pPrice.getText().toString())) {

@@ -104,6 +104,28 @@ public class ImagePickerActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    public static void showImagePickerOptions(Context context, PickerOptionListener listener, String title) {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+
+        // add a list
+        String[] animals = {context.getString(R.string.lbl_take_camera_picture), context.getString(R.string.lbl_choose_from_gallery)};
+        builder.setItems(animals, (dialog, which) -> {
+            switch (which) {
+                case 0:
+                    listener.onTakeCameraSelected();
+                    break;
+                case 1:
+                    listener.onChooseGallerySelected();
+                    break;
+            }
+        });
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     private void takeCameraImage() {
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
