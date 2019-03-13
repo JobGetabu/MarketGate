@@ -43,6 +43,7 @@ class ProfileActivity : AppCompatActivity() {
                 val user: UserFarmer = it.toObject(UserFarmer::class.java) ?: return@addOnSuccessListener
                 p_profile.loadUrl(user.photourl)
                 p_profilename.text = user.name
+                pp_location.text = user.locationstring
             }
     }
 
@@ -53,6 +54,7 @@ class ProfileActivity : AppCompatActivity() {
                 val user: UserAgent = it.toObject(UserAgent::class.java) ?: return@addOnSuccessListener
                 p_profile.loadUrl(user.photourl)
                 p_profilename.text = user.name
+                pp_location.text = user.locationstring
             }
     }
 
