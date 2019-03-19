@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.marketgate.R
 import com.marketgate.core.ProfileActivity
 import com.marketgate.core.ProfileActivity.Companion.USER_ID_EXTRA
+import com.marketgate.farmer.FarmerProductHeader
 import com.marketgate.farmer.ProdDetailsActivity
 import com.marketgate.farmer.ProdDetailsActivity.Companion.DOC_ID_EXTRA
 import com.marketgate.models.USER_FARMER_Product
@@ -36,6 +37,7 @@ fun showDetails(context: Context, docId: String?){
     context.startActivity(intent)
 }
 
+
 fun showProfile(context: Context, userId: String?){
     val prefs = PreferenceHelper.customPrefs(context)
 
@@ -44,9 +46,8 @@ fun showProfile(context: Context, userId: String?){
 
     when (usertype) {
         "Farmer" -> {
-            intent = ProfileActivity.newIntent(context).apply {
-                putExtra(USER_ID_EXTRA, userId)
-            }
+            intent = Intent(context, FarmerProductHeader::class.java)
+            intent.putExtra(USER_ID_EXTRA, userId)
         }
         "Agrovet" -> {
             intent = ProfileActivity.newIntent(context).apply {
