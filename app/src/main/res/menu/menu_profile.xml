@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/prof_menu"
+          android:title="Place Order"
+          android:icon="@drawable/ic_cart_"
+          android:iconTint="@color/grey_80"
+          app:showAsAction="withText"/>
+</menu>
