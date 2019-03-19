@@ -50,9 +50,7 @@ class SigninActivity : AppCompatActivity() {
 
             if (signin_label.text == "Sign In") {
                 loginMe()
-
             } else {
-
                 createAccount()
             }
         }

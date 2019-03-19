@@ -54,13 +54,13 @@ class AgentProfile : Fragment() {
 
         firestore.collection(USER_AGENT).document(user!!.uid).get()
             .addOnCompleteListener {
-                if (it.isSuccessful){
-                    val user  = it.result!!.toObject(UserAgent::class.java) ?: return@addOnCompleteListener
+                if (it.isSuccessful) {
+                    val user = it.result!!.toObject(UserAgent::class.java) ?: return@addOnCompleteListener
 
                     profile_image.loadUrl(user.photourl)
-                    profile_fullname.editText!!.setText( user.name)
-                    profile_coop.editText!!.setText( user.cooperativename)
-                    profile_location.editText!!.setText( user.locationstring)
+                    profile_fullname.editText!!.setText(user.name)
+                    profile_coop.editText!!.setText(user.cooperativename)
+                    profile_location.editText!!.setText(user.locationstring)
                     profile_selling.isChecked = user.buyingstatus
                 }
             }
@@ -70,14 +70,18 @@ class AgentProfile : Fragment() {
         val user = auth.currentUser
 
         firestore.collection(USER_AGENT).document(user!!.uid)
-            .update("name",profile_fullname.editText!!.text.toString(),
-                "buyingstatus",profile_selling.isChecked,
-                "locationstring",profile_location.editText!!.text.toString(),
-            "cooperativename",profile_coop.editText!!.text.toString())
+            .update(
+                "name", profile_fullname.editText!!.text.toString(),
+                "buyingstatus", profile_selling.isChecked,
+                "locationstring", profile_location.editText!!.text.toString(),
+                "cooperativename", profile_coop.editText!!.text.toString()
+            )
             .addOnSuccessListener {
-                showAlert(activity,"Success","Profile updated")
+                showAlert(activity, "Success", "Profile updated")
             }
     }
+
+
 
 
 }
