@@ -4,7 +4,7 @@ import com.google.firebase.firestore.GeoPoint
 
 
 data class UserFarmer(
-    val name: String = "",
+    val name: String? = "",
     val sellingstatus: Boolean = false,
     val top: Boolean = false,
     val recommended: Boolean = false,
@@ -20,7 +20,7 @@ data class UserFarmer(
 )
 
 data class UserAgrovet(
-    val name: String = "",
+    val name: String? = "",
     val buyingstatus: Boolean = false,
     val top: Boolean = false,
     val recommended: Boolean = false,
@@ -35,7 +35,7 @@ data class UserAgrovet(
 )
 
 data class UserAgent(
-    val name: String = "",
+    val name: String? = "",
     val buyingstatus: Boolean = false,
     val top: Boolean = false,
     val recommended: Boolean = false,
@@ -50,7 +50,7 @@ data class UserAgent(
 )
 
 data class UserAdmin(
-    val name: String = "",
+    val name: String? = "",
     val photourl: String? = "",
     var email: String = "",
     var role: String? = "Admin",
