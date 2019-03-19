@@ -50,14 +50,12 @@ fun showProfile(context: Context, userId: String?){
             intent.putExtra(USER_ID_EXTRA, userId)
         }
         "Agrovet" -> {
-            intent = ProfileActivity.newIntent(context).apply {
-                putExtra(USER_ID_EXTRA, userId)
-            }
+            intent = Intent(context, FarmerProductHeader::class.java)
+            intent.putExtra(USER_ID_EXTRA, userId)
         }
         "Agent" -> {
-            intent = ProfileActivity.newIntent(context).apply {
-                putExtra(USER_ID_EXTRA, userId)
-            }
+            intent = Intent(context, FarmerProductHeader::class.java)
+            intent.putExtra(USER_ID_EXTRA, userId)
         }
         "Admin" -> {
             intent = ProfileActivity.newIntent(context).apply {

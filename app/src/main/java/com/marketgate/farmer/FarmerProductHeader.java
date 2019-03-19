@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,36 +34,14 @@ public class FarmerProductHeader extends AppCompatActivity {
     private AdapterImageSlider adapterImageSlider;
     private List<UserFarmerProduct> userFarmerProductList = new ArrayList<>();
 
-    private TextView d_title , d_category , d_price, d_desc, d_units;
+    private TextView d_title, d_category, d_price, d_desc, d_units;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_header);
-
         initToolbar();
 
-        initComponent();
-
-        String docid = getIntent().getStringExtra(USER_ID_EXTRA);
-        initList(docid);
-    }
-
-    private void initList(String docid) {
-        FirebaseFirestore.getInstance().collection(USER_FARMER_Product)
-                .whereEqualTo("userid",docid)
-                .get()
-                .addOnCompleteListener(task -> userFarmerProductList = task.getResult().toObjects(UserFarmerProduct.class));
-        adapterImageSlider.notifyDataSetChanged();
-    }
-
-    private void initToolbar() {
-        androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Product");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    private void initComponent() {
         layout_dots = (LinearLayout) findViewById(R.id.layout_dots);
         viewPager = (ViewPager) findViewById(R.id.pager);
         adapterImageSlider = new AdapterImageSlider(this, userFarmerProductList);
@@ -74,11 +53,38 @@ public class FarmerProductHeader extends AppCompatActivity {
         d_units = findViewById(R.id.d_units);
 
 
+
+        String docid = getIntent().getStringExtra(USER_ID_EXTRA);
+        initList(docid);
+    }
+
+    private void initList(String docid) {
+        FirebaseFirestore.getInstance().collection(USER_FARMER_Product)
+                .whereEqualTo("userid", docid)
+                .get()
+                .addOnCompleteListener(task -> {
+                    userFarmerProductList = task.getResult().toObjects(UserFarmerProduct.class);
+
+                    Log.d("prod", "initList: " + userFarmerProductList.toArray().toString());
+
+                    initComponent();
+                });
+    }
+
+    private void initToolbar() {
+        androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Product");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void initComponent() {
         adapterImageSlider.setItems(userFarmerProductList);
         viewPager.setAdapter(adapterImageSlider);
 
         // displaying selected image first
         viewPager.setCurrentItem(0);
+        changeViewContent(0);
         addBottomDots(layout_dots, adapterImageSlider.getCount(), 0);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -99,15 +105,18 @@ public class FarmerProductHeader extends AppCompatActivity {
     }
 
     private void changeViewContent(int pos) {
-        UserFarmerProduct prod = userFarmerProductList.get(pos);
-        if (prod != null){
+        try {
+            UserFarmerProduct prod = userFarmerProductList.get(pos);
+            if (prod != null) {
 
-            d_title.setText(prod.getProductname());
-            d_category.setText(prod.getProducttype());
-            d_price.setText("Kes $"+ String.valueOf(prod.getPriceindex())+ ".00");
-            d_desc.setText(prod.getProductdescription());
-            d_units.setText(prod.getUnits());
-        }
+                d_title.setText(prod.getProductname());
+                d_category.setText(prod.getProducttype());
+                d_price.setText("Kes $" + String.valueOf(prod.getPriceindex()) + ".00");
+                d_desc.setText(prod.getProductdescription());
+                d_units.setText(String.valueOf(prod.getUnits()));
+            }
+
+        }catch (Exception e){}
     }
 
     private void addBottomDots(LinearLayout layout_dots, int size, int current) {
@@ -177,7 +186,7 @@ public class FarmerProductHeader extends AppCompatActivity {
             return userFarmerProducts.get(pos);
         }
 
-        public void setItems(List<UserFarmerProduct>  items) {
+        public void setItems(List<UserFarmerProduct> items) {
             this.userFarmerProducts = items;
             notifyDataSetChanged();
         }
@@ -197,6 +206,7 @@ public class FarmerProductHeader extends AppCompatActivity {
             ImageView image = (ImageView) v.findViewById(R.id.image);
             MaterialRippleLayout lyt_parent = (MaterialRippleLayout) v.findViewById(R.id.lyt_parent);
             Tools.displayImageOriginal(act, image, imageurl);
+
             lyt_parent.setOnClickListener(v1 -> {
                 if (onItemClickListener != null) {
                     //onItemClickListener.onItemClick(v1, o);

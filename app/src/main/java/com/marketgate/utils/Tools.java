@@ -135,7 +135,7 @@ public class Tools {
         try {
             Glide.with(ctx).load(url)
                     .transition(new DrawableTransitionOptions().crossFade())
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .into(img);
         } catch (Exception e) {
         }
