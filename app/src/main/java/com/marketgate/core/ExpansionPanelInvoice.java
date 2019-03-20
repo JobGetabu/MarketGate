@@ -1,6 +1,8 @@
 package com.marketgate.core;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,9 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import com.marketgate.R;
+import com.marketgate.models.UserFarmerProduct;
+import com.marketgate.utils.AuthUtilKt;
 import com.marketgate.utils.Tools;
 import com.marketgate.utils.ViewAnimation;
-
 
 public class ExpansionPanelInvoice extends AppCompatActivity {
 
@@ -23,6 +26,8 @@ public class ExpansionPanelInvoice extends AppCompatActivity {
     private View lyt_expand_items, lyt_expand_address, lyt_expand_description;
     private NestedScrollView nested_scroll_view;
 
+    private TextView date,price,prod_name,prod_price,prod_total,prod_units,prod_des,textView8;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,31 @@ public class ExpansionPanelInvoice extends AppCompatActivity {
 
         initToolbar();
         initComponent();
+
+        UserFarmerProduct product = getIntent().getParcelableExtra(PROD_EXTRA);
+        if (product != null) {
+            Toast.makeText(this, "" + product.toString(), Toast.LENGTH_SHORT).show();
+
+            setUpUI(product);
+        }
+    }
+
+    private void setUpUI(UserFarmerProduct product) {
+
+        Long thedate = System.currentTimeMillis();
+        String time = Tools.getFormattedTimeEvent(thedate) + ", " +Tools.getFormattedDateSimple(thedate);
+        date.setText(time);
+        prod_name.setText(product.getProductname());
+        prod_des.setText(product.getProductdescription());
+
+
+        price.setText("Kes "+ (product.getUnits() * product.getPriceindex()));
+        prod_total.setText("Kes "+ (product.getUnits() * product.getPriceindex()));
+        prod_price.setText("Kes "+ product.getPriceindex());
+
+        prod_units.setText(product.getUnits());
+
+
     }
 
     private void initToolbar() {
@@ -48,12 +78,17 @@ public class ExpansionPanelInvoice extends AppCompatActivity {
         // section items
         bt_toggle_items = (ImageButton) findViewById(R.id.bt_toggle_items);
         lyt_expand_items = (View) findViewById(R.id.lyt_expand_items);
-        bt_toggle_items.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleSection(view, lyt_expand_items);
-            }
-        });
+        date = findViewById(R.id.date);
+        price = findViewById(R.id.price);
+        prod_name = findViewById(R.id.prod_name);
+        prod_price = findViewById(R.id.prod_price);
+        prod_total = findViewById(R.id.prod_total);
+        prod_units = findViewById(R.id.prod_units);
+        prod_des = findViewById(R.id.prod_des);
+        textView8 = findViewById(R.id.textView8);
+
+
+        bt_toggle_items.setOnClickListener(view -> toggleSection(view, lyt_expand_items));
 
         // section address
         bt_toggle_address = (ImageButton) findViewById(R.id.bt_toggle_address);
@@ -78,11 +113,19 @@ public class ExpansionPanelInvoice extends AppCompatActivity {
         // copy to clipboard
         final TextView tv_invoice_code = (TextView) findViewById(R.id.tv_invoice_code);
         ImageButton bt_copy_code = (ImageButton) findViewById(R.id.bt_copy_code);
-        bt_copy_code.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        bt_copy_code.setOnClickListener(view -> {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ExpansionPanelInvoice.this);
+            alertDialogBuilder.setTitle("Invoice").setMessage("Confirm your order invoice").setPositiveButton("Okay", (dialog, which) ->
+            {
                 Tools.copyToClipboard(getApplicationContext(), tv_invoice_code.getText().toString());
-            }
+                dialog.dismiss();
+                AuthUtilKt.showAlert(ExpansionPanelInvoice.this,"Success","invoice saved");
+                new Handler().postDelayed(this::finish,1500);
+
+            }).setNegativeButton("Cancel", (dialog, which) -> {
+                dialog.dismiss();
+            }).show();
         });
 
     }
@@ -118,9 +161,20 @@ public class ExpansionPanelInvoice extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             finish();
         } else {
-            Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ExpansionPanelInvoice.this);
+            alertDialogBuilder.setTitle("Invoice").setMessage("Confirm your order invoice").setPositiveButton("Okay", (dialog, which) ->
+            {
+
+                dialog.dismiss();
+                AuthUtilKt.showAlert(ExpansionPanelInvoice.this,"Success","invoice saved");
+                new Handler().postDelayed(this::finish,1500);
+
+            }).setNegativeButton("Cancel", (dialog, which) -> {
+                dialog.dismiss();
+            }).show();
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }

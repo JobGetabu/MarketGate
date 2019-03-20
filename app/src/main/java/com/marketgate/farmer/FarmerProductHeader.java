@@ -3,6 +3,7 @@ package com.marketgate.farmer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.media.Image;
 import android.os.Bundle;
@@ -17,12 +18,14 @@ import androidx.viewpager.widget.ViewPager;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.marketgate.R;
+import com.marketgate.core.ExpansionPanelInvoice;
 import com.marketgate.models.UserFarmerProduct;
 import com.marketgate.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.marketgate.core.ExpansionPanelInvoice.PROD_EXTRA;
 import static com.marketgate.core.ProfileActivity.USER_ID_EXTRA;
 import static com.marketgate.models.FirebaseRefsKt.USER_FARMER_Product;
 
@@ -33,6 +36,7 @@ public class FarmerProductHeader extends AppCompatActivity {
     private LinearLayout layout_dots;
     private AdapterImageSlider adapterImageSlider;
     private List<UserFarmerProduct> userFarmerProductList = new ArrayList<>();
+    private UserFarmerProduct seletedProduct;
 
     private TextView d_title, d_category, d_price, d_desc, d_units;
 
@@ -107,6 +111,7 @@ public class FarmerProductHeader extends AppCompatActivity {
     private void changeViewContent(int pos) {
         try {
             UserFarmerProduct prod = userFarmerProductList.get(pos);
+            seletedProduct = prod;
             if (prod != null) {
 
                 d_title.setText(prod.getProductname());
@@ -151,6 +156,7 @@ public class FarmerProductHeader extends AppCompatActivity {
             finish();
         } else {
             Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+            toPlaceOrder(item.getActionView());
         }
         return super.onOptionsItemSelected(item);
     }
@@ -223,6 +229,11 @@ public class FarmerProductHeader extends AppCompatActivity {
             ((ViewPager) container).removeView((RelativeLayout) object);
 
         }
+    }
 
+    public void toPlaceOrder(View v){
+        Intent intent = new Intent(this, ExpansionPanelInvoice.class);
+        intent.putExtra(PROD_EXTRA, seletedProduct);
+        startActivity(intent);
     }
 }

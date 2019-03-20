@@ -211,6 +211,7 @@
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/spacing_large"
             android:clickable="true"
+            android:onClick="toPlaceOrder"
             android:tint="@android:color/white"
             app:backgroundTint="@color/colorPrimary"
             app:fabSize="normal"
