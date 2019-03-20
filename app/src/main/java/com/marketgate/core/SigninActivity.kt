@@ -126,7 +126,7 @@ class SigninActivity : AppCompatActivity() {
         if (usertype == "Admin"){
             if(emailTxt != "admin@gmail.com" && pss != "password"){
                 showAlert(this,"Error","Admin privileges denied. please contact admin")
-
+                return
             }
         }
 
