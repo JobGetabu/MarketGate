@@ -167,7 +167,7 @@ class SigninActivity : AppCompatActivity() {
         val prefs = PreferenceHelper.customPrefs(this)
         usertype = prefs.getString(PreferenceHelper.PREF_USER_TYPE, "")
         if (usertype == "Admin"){
-            if(emailTxt != "admin@gmail.com" && pss != "password"){
+            if(emailTxt != "admin@gmail.com" || pss != "password"){
                 showAlert(this,"Error","Admin privileges denied. please contact admin")
                 return
             }
