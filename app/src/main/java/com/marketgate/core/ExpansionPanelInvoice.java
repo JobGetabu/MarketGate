@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
@@ -38,7 +37,6 @@ public class ExpansionPanelInvoice extends AppCompatActivity {
 
         UserFarmerProduct product = getIntent().getParcelableExtra(PROD_EXTRA);
         if (product != null) {
-            Toast.makeText(this, "" + product.toString(), Toast.LENGTH_SHORT).show();
 
             setUpUI(product);
         }
@@ -56,8 +54,7 @@ public class ExpansionPanelInvoice extends AppCompatActivity {
         price.setText("Kes "+ (product.getUnits() * product.getPriceindex()));
         prod_total.setText("Kes "+ (product.getUnits() * product.getPriceindex()));
         prod_price.setText("Kes "+ product.getPriceindex());
-
-        prod_units.setText(product.getUnits());
+        prod_units.setText(""+product.getUnits());
 
 
     }
