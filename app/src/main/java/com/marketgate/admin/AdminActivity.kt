@@ -21,5 +21,15 @@ class AdminActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
+
+        launchActivity(ListMultiSelection::class.java)
+        finish()
+    }
+
+    private fun launchActivity(intentClass: Class<*>) {
+
+        val intent = Intent(this, intentClass)
+        startActivity(intent)
+        overridePendingTransition(com.marketgate.R.anim.fade_out, com.marketgate.R.anim.fade_in)
     }
 }

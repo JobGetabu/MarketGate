@@ -11,7 +11,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.marketgate.R
 import com.marketgate.admin.AdminActivity
 import com.marketgate.agent.AgentActivity
-import com.marketgate.agrovet.AgrovetActivity
 import com.marketgate.farmer.FarmerActivity
 import com.marketgate.models.*
 import com.marketgate.utils.LoaderDialogue
@@ -88,7 +87,7 @@ class SigninActivity : AppCompatActivity() {
             "Agrovet" -> {
                 val prefs = PreferenceHelper.customPrefs(this)
                 prefs[PreferenceHelper.PREF_USER_TYPE] = usertype
-                intent = AgrovetActivity.newIntent(this).apply {
+                intent = AgentActivity.newIntent(this).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
             }
@@ -120,6 +119,14 @@ class SigninActivity : AppCompatActivity() {
         if (emailTxt.isEmpty() && pss.isEmpty()) {
             toast("Missing email or password")
             return
+        }
+
+        val prefs = PreferenceHelper.customPrefs(this)
+        usertype = prefs.getString(PreferenceHelper.PREF_USER_TYPE, "")
+        if (usertype == "Admin"){
+            if(emailTxt != "admin@gmail.com" && pss != "password"){
+                showAlert(this,"Error","Admin privileges denied. please contact admin")
+            }
         }
 
         showProgress("Logging you in")

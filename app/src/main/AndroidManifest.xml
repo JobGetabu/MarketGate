@@ -58,7 +58,9 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".farmer.FarmerProductHeader"/>
-        <activity android:name=".core.ExpansionPanelInvoice"/> <!-- cache directory file provider paths -->
+        <activity android:name=".core.ExpansionPanelInvoice"/>
+        <activity android:name=".core.FormCheckout"/>
+        <activity android:name=".admin.ListMultiSelection"/> <!-- cache directory file provider paths -->
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.provider"

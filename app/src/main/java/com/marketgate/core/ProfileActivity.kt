@@ -59,6 +59,7 @@ class ProfileActivity : AppCompatActivity() {
 
     fun onFabClick(v: View) {
         launchActivity(FormCheckout::class.java)
+        finish()
         //showAlert(this, "Success", "Product added to watchlist")
     }
 

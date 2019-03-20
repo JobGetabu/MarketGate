@@ -7,6 +7,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/nunito</item>
+        <item name="materialButtonStyle">@style/Widget.MyApp.MyButton</item>
+    </style>
+
+    <style name="Widget.MyApp.MyButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="android:textColor">@color/mdtp_white</item>
+
     </style>
 
     <style name="SplashTheme" parent="AppTheme">

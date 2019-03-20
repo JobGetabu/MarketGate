@@ -67,6 +67,11 @@ class AgentActivity : AppCompatActivity() {
         setContentView(com.marketgate.R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        val prefs = PreferenceHelper.customPrefs(this)
+
+        val usertype = prefs.getString(PreferenceHelper.PREF_USER_TYPE, "")
+        if (usertype == "Agrovet") toolbar.title = "Agrovet"
+
         mAuth = FirebaseAuth.getInstance()
 
         initViews()

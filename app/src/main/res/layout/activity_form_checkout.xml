@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -21,23 +21,24 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey_5"
-        android:clipToPadding="false"
-        android:padding="@dimen/spacing_mlarge"
-        android:scrollbars="none"
-        android:scrollingCache="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey_5"
+            android:clipToPadding="false"
+            android:padding="@dimen/spacing_mlarge"
+            android:scrollbars="none"
+            android:scrollingCache="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:id="@+id/myname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -50,18 +51,18 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_mlarge" />
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_mlarge"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -69,37 +70,38 @@
                             android:hint="Farm Product"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:text="4522 **** **** ****"/>
+                            />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <View
-                    android:layout_width="@dimen/spacing_large"
-                    android:layout_height="0dp" />
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="0dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Units"
                             android:maxLines="1"
+                            android:inputType="number"
                             android:singleLine="true"
-                            android:text="***"/>
+                            android:text="100"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_mlarge" />
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_mlarge"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/bt_exp_date"
@@ -117,36 +119,36 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_mlarge" />
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_mlarge"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Product Description"
-                        android:maxLines="1"
+                        android:maxLines="6"
                         android:singleLine="true"
-                        />
+                        android:inputType="textLongMessage|textMultiLine"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_mlarge" />
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_mlarge"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -159,13 +161,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <View
-                    android:layout_width="@dimen/spacing_large"
-                    android:layout_height="0dp" />
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="0dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -179,37 +181,38 @@
             </LinearLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_mlarge" />
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_mlarge"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Postal code"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="98546" />
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:hint="Postal code"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="98546"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <View
-                    android:layout_width="@dimen/spacing_large"
-                    android:layout_height="0dp" />
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="0dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -223,8 +226,8 @@
             </LinearLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_mlarge" />
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_mlarge"/>
 
             <Button
                     android:id="@+id/bt_submit"
@@ -240,8 +243,8 @@
                     android:textColor="@android:color/white"/>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_mlarge" />
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_mlarge"/>
 
         </LinearLayout>
 
