@@ -17,9 +17,11 @@ import com.marketgate.models.*
 import com.marketgate.utils.LoaderDialogue
 import com.marketgate.utils.PreferenceHelper
 import com.marketgate.utils.PreferenceHelper.set
+import com.marketgate.utils.showAlert
 import com.raiachat.util.hideView
 import com.raiachat.util.toast
 import kotlinx.android.synthetic.main.activity_login_card_light.*
+import org.jetbrains.anko.act
 
 class SigninActivity : AppCompatActivity() {
 
@@ -138,6 +140,7 @@ class SigninActivity : AppCompatActivity() {
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
+                    showAlert(act,""+task.exception?.localizedMessage,task.exception.toString())
                     dismissProgressDialog()
                 }
             }
