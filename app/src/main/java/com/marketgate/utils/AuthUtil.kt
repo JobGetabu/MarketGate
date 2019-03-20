@@ -46,8 +46,9 @@ fun showProfile(context: Context, userId: String?){
 
     when (usertype) {
         "Farmer" -> {
-            intent = Intent(context, FarmerProductHeader::class.java)
-            intent.putExtra(USER_ID_EXTRA, userId)
+            intent = ProfileActivity.newIntent(context).apply {
+                putExtra(USER_ID_EXTRA, userId)
+            }
         }
         "Agrovet" -> {
             intent = Intent(context, FarmerProductHeader::class.java)
