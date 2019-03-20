@@ -17,6 +17,8 @@ import com.marketgate.utils.ViewAnimation;
 
 public class ExpansionPanelInvoice extends AppCompatActivity {
 
+    public static final String PROD_EXTRA = "PROD_EXTRA";
+
     private ImageButton bt_toggle_items, bt_toggle_address, bt_toggle_description;
     private View lyt_expand_items, lyt_expand_address, lyt_expand_description;
     private NestedScrollView nested_scroll_view;
