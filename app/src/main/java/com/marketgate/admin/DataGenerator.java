@@ -55,7 +55,7 @@ public class DataGenerator {
             obj.image = drw_arr.getResourceId(i, -1);
             obj.from = name_arr[i];
             obj.email = Tools.getEmailFromName(obj.from);
-            obj.message = ctx.getResources().getString(R.string.lorem_ipsum);
+            obj.message = "Profile details for the user in Market gate backend database overhead";
             obj.date = date_arr[randInt(date_arr.length - 1)];
             obj.imageDrw = ctx.getResources().getDrawable(obj.image);
             items.add(obj);
