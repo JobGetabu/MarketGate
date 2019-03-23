@@ -8,8 +8,8 @@ object PreferenceHelper {
 
     //prefs
     var PREF_PHONE_NUMBER: String = ""
-    var PREF_USER_NAME: String = ""
-    var PREF_USER_TYPE: String = ""
+    var PREF_USER_NAME: String = "PREF_USER_NAME"
+    var PREF_USER_TYPE: String = "PREF_USER_TYPE"
 
     fun defaultPrefs(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 

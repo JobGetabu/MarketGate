@@ -11,7 +11,6 @@ import com.marketgate.models.USER_AGENT
 import com.marketgate.models.USER_FARMER
 import com.marketgate.models.UserAgent
 import com.marketgate.models.UserFarmer
-import com.marketgate.utils.showAlert
 import com.raiachat.util.loadUrl
 import kotlinx.android.synthetic.main.activity_profile_farmer.*
 
@@ -59,6 +58,14 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     fun onFabClick(v: View) {
-        showAlert(this, "Success", "Product added to watchlist")
+        launchActivity(FormCheckout::class.java)
+        finish()
+        //showAlert(this, "Success", "Product added to watchlist")
+    }
+
+    private fun launchActivity(intentClass: Class<*>) {
+        val intent = Intent(this, intentClass)
+        startActivity(intent)
+        overridePendingTransition(com.marketgate.R.anim.fade_out, com.marketgate.R.anim.fade_in)
     }
 }

@@ -79,30 +79,34 @@ class LoginActivity : AppCompatActivity(), GoogleLoginCallback {
         loginAgent.setOnClickListener {
             showProgress("Login in...", "Accessing agent account")
             usertype = "Agent"
-            logInWithGoogle(this)
+            val prefs = customPrefs(this)
+            prefs[PREF_USER_TYPE] = usertype
+            launchActivity(SigninActivity::class.java)
         }
 
         loginAgrovet.setOnClickListener {
-            showAlert(this,"Oops !","Under Development")
-            return@setOnClickListener
 
             showProgress("Login in...", "Accessing agrovet account")
             usertype = "Agrovet"
-            logInWithGoogle(this)
+            val prefs = customPrefs(this)
+            prefs[PREF_USER_TYPE] = usertype
+            launchActivity(SigninActivity::class.java)
         }
 
         loginAdmin.setOnClickListener {
-            showAlert(this,"Oops !","Under Development")
-            return@setOnClickListener
+            showAlert(this,"accessing admin privileages !","")
 
             showProgress("Login in...", "Accessing admin account")
             usertype = "Admin"
-            logInWithGoogle(this)
+            val prefs = customPrefs(this)
+            prefs[PREF_USER_TYPE] = usertype
+            launchActivity(SigninActivity::class.java)
         }
 
     }
 
     private fun launchActivity(intentClass: Class<*>) {
+        dismissProgressDialog()
         val intent = Intent(this, intentClass)
         startActivity(intent)
         overridePendingTransition(com.marketgate.R.anim.fade_out, com.marketgate.R.anim.fade_in)

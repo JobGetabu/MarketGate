@@ -1,10 +1,12 @@
 package com.marketgate.models
 
+import android.os.Parcelable
 import com.google.firebase.firestore.GeoPoint
+import kotlinx.android.parcel.Parcelize
 
 
 data class UserFarmer(
-    val name: String = "",
+    val name: String? = "",
     val sellingstatus: Boolean = false,
     val top: Boolean = false,
     val recommended: Boolean = false,
@@ -20,7 +22,7 @@ data class UserFarmer(
 )
 
 data class UserAgrovet(
-    val name: String = "",
+    val name: String? = "",
     val buyingstatus: Boolean = false,
     val top: Boolean = false,
     val recommended: Boolean = false,
@@ -35,7 +37,7 @@ data class UserAgrovet(
 )
 
 data class UserAgent(
-    val name: String = "",
+    val name: String? = "",
     val buyingstatus: Boolean = false,
     val top: Boolean = false,
     val recommended: Boolean = false,
@@ -50,13 +52,14 @@ data class UserAgent(
 )
 
 data class UserAdmin(
-    val name: String = "",
+    val name: String? = "",
     val photourl: String? = "",
     var email: String = "",
     var role: String? = "Admin",
     var userid: String = ""
 )
 
+@Parcelize
 data class UserFarmerProduct(
     val productname: String = "",
     val producttype: String? = "",
@@ -67,4 +70,4 @@ data class UserFarmerProduct(
     val priceindex: Int = 0,
     var productdescription: String = "",
     var userid: String = ""
-)
+): Parcelable

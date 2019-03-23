@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryLight">#1E88E5</color>
     <color name="colorAccent">#D81B60</color>
 
     <color name="milkWhite">#F9F9F9</color>
@@ -91,6 +92,16 @@
     <color name="dot_light_screen2">#607D8B</color>
     <color name="dot_light_screen3">#607D8B</color>
     <color name="dot_light_screen4">#607D8B</color>
+
+    <color name="blue_300">#64B5F6</color>
+
+    <color name="blue_grey_300">#90A4AE</color>
+    <color name="blue_grey_600">#546E7A</color>
+    <color name="blue_grey_700">#455A64</color>
+    <color name="blue_grey_800">#37474F</color>
+    <color name="blue_grey_900">#263238</color>
+
+    <color name="red_600">#E53935</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>
