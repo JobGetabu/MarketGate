@@ -65,12 +65,7 @@ class AgentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.marketgate.R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
-        val prefs = PreferenceHelper.customPrefs(this)
-
-        val usertype = prefs.getString(PreferenceHelper.PREF_USER_TYPE, "")
-        if (usertype == "Agrovet") toolbar.title = "Agrovet"
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -88,6 +83,10 @@ class AgentActivity : AppCompatActivity() {
         supportActionBar?.title = AgentActivity.HOME
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+
+        val prefs = PreferenceHelper.customPrefs(this)
+        val usertype = prefs.getString(PreferenceHelper.PREF_USER_TYPE, "")
+        if (usertype == "Agrovet") toolbar.setTitle("Agrovet")
 
         setupViewPager()
 
