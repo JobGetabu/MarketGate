@@ -19,6 +19,7 @@ import com.marketgate.admin.AdminActivity
 import com.marketgate.agent.AgentActivity
 import com.marketgate.farmer.FarmerActivity
 import com.marketgate.models.*
+import com.marketgate.news.NewsActivity
 import com.marketgate.utils.GoogleLoginCallback
 import com.marketgate.utils.GoogleSignInApiUtils.getUserData
 import com.marketgate.utils.LoaderDialogue
@@ -101,6 +102,10 @@ class LoginActivity : AppCompatActivity(), GoogleLoginCallback {
 //            prefs[PREF_USER_TYPE] = usertype
 //            launchActivity(SigninActivity::class.java)
 //        }
+
+        news_btn.setOnClickListener{
+            launchActivity(NewsActivity::class.java)
+        }
 
     }
 

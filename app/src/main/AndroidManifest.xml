@@ -60,7 +60,9 @@
         <activity android:name=".farmer.FarmerProductHeader"/>
         <activity android:name=".core.ExpansionPanelInvoice"/>
         <activity android:name=".core.FormCheckout"/>
-        <activity android:name=".admin.ListMultiSelection"/> <!-- cache directory file provider paths -->
+        <activity android:name=".admin.ListMultiSelection"/>
+        <activity android:name=".news.DetailsActivity"/>
+        <activity android:name=".news.NewsActivity"/> <!-- cache directory file provider paths -->
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.provider"
