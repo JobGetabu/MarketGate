@@ -76,6 +76,25 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.0"/>
 
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/news_btn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingStart="40dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="40dp"
+                    android:paddingBottom="8dp"
+                    android:text="Market Gate News"
+                    android:textColor="@android:color/black"
+                    app:backgroundTint="@android:color/white"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="@+id/loginAgrovet"
+                    app:layout_constraintStart_toStartOf="@+id/loginAgrovet"
+                    app:layout_constraintTop_toBottomOf="@+id/loginAdmin"
+                    />
+
             <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
