@@ -56,26 +56,6 @@
                     app:layout_constraintStart_toStartOf="@+id/loginAgrovet"
                     app:layout_constraintTop_toBottomOf="@+id/textView6"/>
 
-            <com.google.android.material.button.MaterialButton
-                    android:id="@+id/loginAdmin"
-                    style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingStart="40dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="40dp"
-                    android:paddingBottom="8dp"
-                    android:text="Continue as an Admin"
-                    android:textAllCaps="false"
-                    app:backgroundTint="#384A87"
-                    app:layout_constraintEnd_toEndOf="@+id/loginAgrovet"
-                    app:layout_constraintStart_toStartOf="@+id/loginAgrovet"
-                    app:layout_constraintTop_toBottomOf="@+id/loginAgrovet"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0.0"/>
-
             <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"

@@ -92,15 +92,15 @@ class LoginActivity : AppCompatActivity(), GoogleLoginCallback {
             launchActivity(SigninActivity::class.java)
         }
 
-        loginAdmin.setOnClickListener {
-            showAlert(this,"accessing admin privileages !","")
-
-            showProgress("Login in...", "Accessing admin account")
-            usertype = "Admin"
-            val prefs = customPrefs(this)
-            prefs[PREF_USER_TYPE] = usertype
-            launchActivity(SigninActivity::class.java)
-        }
+//        loginAdmin.setOnClickListener {
+//            showAlert(this,"accessing admin privileages !","")
+//
+//            showProgress("Login in...", "Accessing admin account")
+//            usertype = "Admin"
+//            val prefs = customPrefs(this)
+//            prefs[PREF_USER_TYPE] = usertype
+//            launchActivity(SigninActivity::class.java)
+//        }
 
     }
 
